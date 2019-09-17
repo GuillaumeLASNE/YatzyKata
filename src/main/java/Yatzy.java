@@ -57,30 +57,30 @@ public class Yatzy {
     }
 
     public int fours() {
+        int four = 4;
+        int sum = sumDiceWithSameValueAs(four);
+        return sum;
+    }
+
+    private int sumDiceWithSameValueAs(int value) {
         int sum = 0;
         for (int die : dice) {
-            if (die == 4) {
-                sum += 4;
+            if (die == value) {
+                sum += value;
             }
         }
         return sum;
     }
 
     public int fives() {
-        int sum = 0;
-        for (int die : dice) {
-            if (die == 5)
-                sum = sum + 5;
-        }
+        int five = 5;
+        int sum = sumDiceWithSameValueAs(five);
         return sum;
     }
 
     public int sixes() {
-        int sum = 0;
-        for (int die : dice) {
-            if (die == 6)
-                sum = sum + 6;
-        }
+        int six = 6;
+        int sum = sumDiceWithSameValueAs(six);
         return sum;
     }
 
