@@ -32,21 +32,18 @@ public class Yatzy {
     }
 
     public static int ones(int d1, int d2, int d3, int d4, int d5) {
-        final int one = 1;
-        return sumSameDiceValues(d1, d2, d3, d4, d5, one);
+        return sumSameDiceValues(1, d1, d2, d3, d4, d5);
     }
 
     public static int twos(int d1, int d2, int d3, int d4, int d5) {
-        final int two = 2;
-        return sumSameDiceValues(d1, d2, d3, d4, d5, two);
+        return sumSameDiceValues(2, d1, d2, d3, d4, d5);
     }
 
     public static int threes(int d1, int d2, int d3, int d4, int d5) {
-        final int three = 3;
-        return sumSameDiceValues(d1, d2, d3, d4, d5, three);
+        return sumSameDiceValues(3, d1, d2, d3, d4, d5);
     }
 
-    private static int sumSameDiceValues(int d1, int d2, int d3, int d4, int d5, int value) {
+    private static int sumSameDiceValues(int value, int d1, int d2, int d3, int d4, int d5) {
         int sum = 0;
         if (d1 == value) sum += value;
         if (d2 == value) sum += value;
@@ -57,9 +54,15 @@ public class Yatzy {
     }
 
     public int fours() {
-        int four = 4;
-        int sum = sumDiceWithSameValueAs(four);
-        return sum;
+        return sumDiceWithSameValueAs(4);
+    }
+
+    public int fives() {
+        return sumDiceWithSameValueAs(5);
+    }
+
+    public int sixes() {
+        return sumDiceWithSameValueAs(6);
     }
 
     private int sumDiceWithSameValueAs(int value) {
@@ -69,18 +72,6 @@ public class Yatzy {
                 sum += value;
             }
         }
-        return sum;
-    }
-
-    public int fives() {
-        int five = 5;
-        int sum = sumDiceWithSameValueAs(five);
-        return sum;
-    }
-
-    public int sixes() {
-        int six = 6;
-        int sum = sumDiceWithSameValueAs(six);
         return sum;
     }
 
