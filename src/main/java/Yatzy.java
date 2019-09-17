@@ -57,10 +57,9 @@ public class Yatzy {
     }
 
     public int fours() {
-        int sum;
-        sum = 0;
-        for (int at = 0; at != 5; at++) {
-            if (dice[at] == 4) {
+        int sum = 0;
+        for (int die : dice) {
+            if (die == 4) {
                 sum += 4;
             }
         }
@@ -68,19 +67,20 @@ public class Yatzy {
     }
 
     public int fives() {
-        int s = 0;
-        int i;
-        for (i = 0; i < dice.length; i++)
-            if (dice[i] == 5)
-                s = s + 5;
-        return s;
+        int sum = 0;
+        for (int die : dice) {
+            if (die == 5)
+                sum = sum + 5;
+        }
+        return sum;
     }
 
     public int sixes() {
         int sum = 0;
-        for (int die : dice)
+        for (int die : dice) {
             if (die == 6)
                 sum = sum + 6;
+        }
         return sum;
     }
 
