@@ -137,26 +137,26 @@ public class Yatzy {
 
     public static int fullHouse(int d1, int d2, int d3, int d4, int d5) {
         int[] tallies = dieOccurrences(d1, d2, d3, d4, d5);
-        boolean _2 = false;
         int i;
-        int _2_at = 0;
-        boolean _3 = false;
-        int _3_at = 0;
+        boolean twoOfAKind = false;
+        int twoOfAKindAt = 0;
+        boolean threeOfAKind = false;
+        int threeOfAKindAt = 0;
 
         for (i = 0; i != 6; i += 1)
             if (tallies[i] == 2) {
-                _2 = true;
-                _2_at = i + 1;
+                twoOfAKind = true;
+                twoOfAKindAt = i + 1;
             }
 
         for (i = 0; i != 6; i += 1)
             if (tallies[i] == 3) {
-                _3 = true;
-                _3_at = i + 1;
+                threeOfAKind = true;
+                threeOfAKindAt = i + 1;
             }
 
-        if (_2 && _3)
-            return _2_at * 2 + _3_at * 3;
+        if (twoOfAKind && threeOfAKind)
+            return twoOfAKindAt * 2 + threeOfAKindAt * 3;
         else
             return 0;
     }
