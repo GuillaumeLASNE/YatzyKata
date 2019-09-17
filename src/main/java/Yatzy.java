@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Yatzy {
 
     protected int[] dice;
@@ -54,25 +56,21 @@ public class Yatzy {
     }
 
     public int fours() {
-        return sumDiceWithSameValueAs(4);
+        return sumDiceWithSameValueAs(4, this.dice);
     }
 
     public int fives() {
-        return sumDiceWithSameValueAs(5);
+        return sumDiceWithSameValueAs(5, this.dice);
     }
 
     public int sixes() {
-        return sumDiceWithSameValueAs(6);
+        return sumDiceWithSameValueAs(6, this.dice);
     }
 
-    private int sumDiceWithSameValueAs(int value) {
-        int sum = 0;
-        for (int die : dice) {
-            if (die == value) {
-                sum += value;
-            }
-        }
-        return sum;
+    private int sumDiceWithSameValueAs(int value, int[] dice) {
+        return Arrays.stream(dice)
+                .filter(die -> die == value)
+                .sum();
     }
 
     public static int onePair(int d1, int d2, int d3, int d4, int d5) {
