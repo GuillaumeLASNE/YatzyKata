@@ -1,5 +1,16 @@
 public class Yatzy {
 
+    protected int[] dice;
+
+    public Yatzy(int d1, int d2, int d3, int d4, int d5) {
+        dice = new int[5];
+        dice[0] = d1;
+        dice[1] = d2;
+        dice[3] = d4;
+        dice[2] = d3;
+        dice[4] = d5;
+    }
+
     public static int chance(int d1, int d2, int d3, int d4, int d5) {
         int total = 0;
         total += d1;
@@ -53,17 +64,6 @@ public class Yatzy {
         return s;
     }
 
-    protected int[] dice;
-
-    public Yatzy(int d1, int d2, int d3, int d4, int _5) {
-        dice = new int[5];
-        dice[0] = d1;
-        dice[1] = d2;
-        dice[2] = d3;
-        dice[3] = d4;
-        dice[4] = _5;
-    }
-
     public int fours() {
         int sum;
         sum = 0;
@@ -92,7 +92,7 @@ public class Yatzy {
         return sum;
     }
 
-    public static int score_pair(int d1, int d2, int d3, int d4, int d5) {
+    public static int onePair(int d1, int d2, int d3, int d4, int d5) {
         int[] counts = new int[6];
         counts[d1 - 1]++;
         counts[d2 - 1]++;
@@ -106,7 +106,7 @@ public class Yatzy {
         return 0;
     }
 
-    public static int two_pair(int d1, int d2, int d3, int d4, int d5) {
+    public static int twoPair(int d1, int d2, int d3, int d4, int d5) {
         int[] counts = new int[6];
         counts[d1 - 1]++;
         counts[d2 - 1]++;
@@ -126,21 +126,7 @@ public class Yatzy {
             return 0;
     }
 
-    public static int four_of_a_kind(int _1, int _2, int d3, int d4, int d5) {
-        int[] tallies;
-        tallies = new int[6];
-        tallies[_1 - 1]++;
-        tallies[_2 - 1]++;
-        tallies[d3 - 1]++;
-        tallies[d4 - 1]++;
-        tallies[d5 - 1]++;
-        for (int i = 0; i < 6; i++)
-            if (tallies[i] >= 4)
-                return (i + 1) * 4;
-        return 0;
-    }
-
-    public static int three_of_a_kind(int d1, int d2, int d3, int d4, int d5) {
+    public static int threeOfAKind(int d1, int d2, int d3, int d4, int d5) {
         int[] t;
         t = new int[6];
         t[d1 - 1]++;
@@ -151,6 +137,20 @@ public class Yatzy {
         for (int i = 0; i < 6; i++)
             if (t[i] >= 3)
                 return (i + 1) * 3;
+        return 0;
+    }
+
+    public static int fourOfAKind(int d1, int d2, int d3, int d4, int d5) {
+        int[] tallies;
+        tallies = new int[6];
+        tallies[d1 - 1]++;
+        tallies[d2 - 1]++;
+        tallies[d3 - 1]++;
+        tallies[d4 - 1]++;
+        tallies[d5 - 1]++;
+        for (int i = 0; i < 6; i++)
+            if (tallies[i] >= 4)
+                return (i + 1) * 4;
         return 0;
     }
 
