@@ -32,36 +32,28 @@ public class Yatzy {
     }
 
     public static int ones(int d1, int d2, int d3, int d4, int d5) {
-        int sum = 0;
-        if (d1 == 1) sum++;
-        if (d2 == 1) sum++;
-        if (d3 == 1) sum++;
-        if (d4 == 1) sum++;
-        if (d5 == 1)
-            sum++;
-
-        return sum;
+        final int one = 1;
+        return sumSameDiceValues(d1, d2, d3, d4, d5, one);
     }
 
     public static int twos(int d1, int d2, int d3, int d4, int d5) {
-        int sum = 0;
-        if (d1 == 2) sum += 2;
-        if (d2 == 2) sum += 2;
-        if (d3 == 2) sum += 2;
-        if (d4 == 2) sum += 2;
-        if (d5 == 2) sum += 2;
-        return sum;
+        final int two = 2;
+        return sumSameDiceValues(d1, d2, d3, d4, d5, two);
     }
 
     public static int threes(int d1, int d2, int d3, int d4, int d5) {
-        int s;
-        s = 0;
-        if (d1 == 3) s += 3;
-        if (d2 == 3) s += 3;
-        if (d3 == 3) s += 3;
-        if (d4 == 3) s += 3;
-        if (d5 == 3) s += 3;
-        return s;
+        final int three = 3;
+        return sumSameDiceValues(d1, d2, d3, d4, d5, three);
+    }
+
+    private static int sumSameDiceValues(int d1, int d2, int d3, int d4, int d5, int value) {
+        int sum = 0;
+        if (d1 == value) sum += value;
+        if (d2 == value) sum += value;
+        if (d3 == value) sum += value;
+        if (d4 == value) sum += value;
+        if (d5 == value) sum += value;
+        return sum;
     }
 
     public int fours() {
