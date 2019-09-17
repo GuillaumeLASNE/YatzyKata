@@ -69,23 +69,27 @@ public class Yatzy {
 
     public static int onePair(int d1, int d2, int d3, int d4, int d5) {
         int[] tallies = dieOccurrences(d1, d2, d3, d4, d5);
-        int at;
-        for (at = 0; at != 6; at++)
-            if (tallies[6 - at - 1] >= 2)
-                return (6 - at) * 2;
+        int talliesLength = 6;
+        for (int i = 0; i != talliesLength; i++) {
+            if (tallies[talliesLength - i - 1] >= 2) {
+                return (talliesLength - i) * 2;
+            }
+        }
         return 0;
     }
 
     public static int twoPair(int d1, int d2, int d3, int d4, int d5) {
         int[] tallies = dieOccurrences(d1, d2, d3, d4, d5);
-        int n = 0;
+        int numberOfPairs = 0;
         int score = 0;
-        for (int i = 0; i < 6; i += 1)
-            if (tallies[6 - i - 1] >= 2) {
-                n++;
-                score += (6 - i);
+        int talliesLength = 6;
+        for (int i = 0; i < talliesLength; i++) {
+            if (tallies[talliesLength - i - 1] >= 2) {
+                numberOfPairs++;
+                score += (talliesLength - i);
             }
-        if (n == 2)
+        }
+        if (numberOfPairs == 2)
             return score * 2;
         else
             return 0;
@@ -93,7 +97,8 @@ public class Yatzy {
 
     public static int threeOfAKind(int d1, int d2, int d3, int d4, int d5) {
         int[] tallies = dieOccurrences(d1, d2, d3, d4, d5);
-        for (int i = 0; i < 6; i++)
+        int talliesLength = 6;
+        for (int i = 0; i < talliesLength; i++)
             if (tallies[i] >= 3)
                 return (i + 1) * 3;
         return 0;
@@ -131,23 +136,25 @@ public class Yatzy {
 
     public static int fullHouse(int d1, int d2, int d3, int d4, int d5) {
         int[] tallies = dieOccurrences(d1, d2, d3, d4, d5);
-        int i;
         boolean twoOfAKind = false;
         int twoOfAKindAt = 0;
         boolean threeOfAKind = false;
         int threeOfAKindAt = 0;
 
-        for (i = 0; i != 6; i += 1)
+        int i;
+        for (i = 0; i != 6; i++) {
             if (tallies[i] == 2) {
                 twoOfAKind = true;
                 twoOfAKindAt = i + 1;
             }
+        }
 
-        for (i = 0; i != 6; i += 1)
+        for (i = 0; i != 6; i++) {
             if (tallies[i] == 3) {
                 threeOfAKind = true;
                 threeOfAKindAt = i + 1;
             }
+        }
 
         if (twoOfAKind && threeOfAKind)
             return twoOfAKindAt * 2 + threeOfAKindAt * 3;
