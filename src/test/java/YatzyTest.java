@@ -75,6 +75,14 @@ public class YatzyTest {
     }
 
     @Test
+    public void one_pair_scores_the_sum_of_the_highest_matching_pair() {
+        assertEquals(0, new Yatzy(1, 2, 3, 5, 6).onePair());
+        assertEquals(6, new Yatzy(3, 4, 3, 5, 6).onePair());
+        assertEquals(10, new Yatzy(5, 3, 3, 3, 5).onePair());
+        assertEquals(12, new Yatzy(5, 3, 6, 6, 5).onePair());
+    }
+
+    @Test
     public void two_pair() {
         assertEquals(0, Yatzy.twoPair(1, 2, 3, 5, 6));
         assertEquals(16, Yatzy.twoPair(3, 3, 5, 4, 5));

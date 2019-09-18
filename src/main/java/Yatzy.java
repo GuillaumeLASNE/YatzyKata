@@ -2,7 +2,8 @@ import java.util.Arrays;
 
 public class Yatzy {
 
-    protected int[] dice;
+    private static final int DIE_FACES_NUMBER = 6;
+    private int[] dice;
 
     public Yatzy(int d1, int d2, int d3, int d4, int d5) {
         dice = new int[5];
@@ -47,10 +48,19 @@ public class Yatzy {
 
     public static int onePair(int d1, int d2, int d3, int d4, int d5) {
         int[] tallies = dieOccurrences(d1, d2, d3, d4, d5);
-        int talliesLength = 6;
-        for (int i = 0; i != talliesLength; i++) {
-            if (tallies[talliesLength - i - 1] >= 2) {
-                return (talliesLength - i) * 2;
+        for (int i = 0; i != DIE_FACES_NUMBER; i++) {
+            if (tallies[DIE_FACES_NUMBER - i - 1] >= 2) {
+                return (DIE_FACES_NUMBER - i) * 2;
+            }
+        }
+        return 0;
+    }
+
+    public int onePair() {
+        int[] dieOccurrences = dieOccurrences(this.dice);
+        for (int i = 0; i != DIE_FACES_NUMBER; i++) {
+            if (dieOccurrences[DIE_FACES_NUMBER - i - 1] >= 2) {
+                return (DIE_FACES_NUMBER - i) * 2;
             }
         }
         return 0;
@@ -60,11 +70,10 @@ public class Yatzy {
         int[] tallies = dieOccurrences(d1, d2, d3, d4, d5);
         int numberOfPairs = 0;
         int score = 0;
-        int talliesLength = 6;
-        for (int i = 0; i < talliesLength; i++) {
-            if (tallies[talliesLength - i - 1] >= 2) {
+        for (int i = 0; i < DIE_FACES_NUMBER; i++) {
+            if (tallies[DIE_FACES_NUMBER - i - 1] >= 2) {
                 numberOfPairs++;
-                score += (talliesLength - i);
+                score += (DIE_FACES_NUMBER - i);
             }
         }
         if (numberOfPairs == 2)
@@ -75,8 +84,7 @@ public class Yatzy {
 
     public static int threeOfAKind(int d1, int d2, int d3, int d4, int d5) {
         int[] tallies = dieOccurrences(d1, d2, d3, d4, d5);
-        int talliesLength = 6;
-        for (int i = 0; i < talliesLength; i++)
+        for (int i = 0; i < DIE_FACES_NUMBER; i++)
             if (tallies[i] >= 3)
                 return (i + 1) * 3;
         return 0;
@@ -84,7 +92,7 @@ public class Yatzy {
 
     public static int fourOfAKind(int d1, int d2, int d3, int d4, int d5) {
         int[] tallies = dieOccurrences(d1, d2, d3, d4, d5);
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < DIE_FACES_NUMBER; i++)
             if (tallies[i] >= 4)
                 return (i + 1) * 4;
         return 0;
@@ -120,14 +128,14 @@ public class Yatzy {
         int threeOfAKindAt = 0;
 
         int i;
-        for (i = 0; i != 6; i++) {
+        for (i = 0; i != DIE_FACES_NUMBER; i++) {
             if (tallies[i] == 2) {
                 twoOfAKind = true;
                 twoOfAKindAt = i + 1;
             }
         }
 
-        for (i = 0; i != 6; i++) {
+        for (i = 0; i != DIE_FACES_NUMBER; i++) {
             if (tallies[i] == 3) {
                 threeOfAKind = true;
                 threeOfAKindAt = i + 1;
@@ -141,13 +149,26 @@ public class Yatzy {
     }
 
     private static int[] dieOccurrences(int d1, int d2, int d3, int d4, int d5) {
-        int[] tallies = new int[6];
+        int[] tallies = new int[DIE_FACES_NUMBER];
         tallies[d1 - 1]++;
         tallies[d2 - 1]++;
         tallies[d3 - 1]++;
         tallies[d4 - 1]++;
         tallies[d5 - 1]++;
         return tallies;
+    }
+
+    private int[] dieOccurrences(int[] dice) {
+        int[] dieOccurrences = new int[DIE_FACES_NUMBER];
+        for (int die : dice) {
+            incrementDieOccurrence(die, dieOccurrences);
+        }
+        return dieOccurrences;
+    }
+
+    private void incrementDieOccurrence(int die, int[] dieOccurrences) {
+        int dieWithOffset = die - 1;
+        dieOccurrences[dieWithOffset]++;
     }
 
     private int sumDiceWithSameValueAs(int value, int[] dice) {
