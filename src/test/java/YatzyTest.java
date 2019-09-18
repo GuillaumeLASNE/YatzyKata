@@ -18,7 +18,7 @@ public class YatzyTest {
     }
 
     @Test
-    public void scoring_yatzy_final_dices_using_ones_should_sum_the_dices_at_value_one() {
+    public void scoring_ones_should_sum_the_dices_at_value_one() {
         assertEquals(0, new Yatzy(6, 2, 2, 4, 5).ones());
         assertEquals(1, new Yatzy(1, 2, 3, 4, 5).ones());
         assertEquals(2, new Yatzy(1, 2, 1, 4, 5).ones());
@@ -26,28 +26,21 @@ public class YatzyTest {
     }
 
     @Test
-    public void twos() {
-        assertEquals(0, Yatzy.twos(1, 5, 3, 1, 6));
-        assertEquals(4, Yatzy.twos(1, 2, 3, 2, 6));
-        assertEquals(10, Yatzy.twos(2, 2, 2, 2, 2));
-    }
-
-    @Test
-    public void scoring_yatzy_final_dices_using_twos_should_sum_the_dices_at_value_two() {
+    public void scoring_twos_should_sum_the_dices_at_value_two() {
         assertEquals(0, new Yatzy(1, 5, 3, 1, 6).twos());
         assertEquals(4, new Yatzy(1, 2, 3, 2, 6).twos());
         assertEquals(10, new Yatzy(2, 2, 2, 2, 2).twos());
     }
 
     @Test
-    public void threes() {
-        assertEquals(0, Yatzy.threes(1, 2, 4, 2, 4));
-        assertEquals(6, Yatzy.threes(1, 2, 3, 2, 3));
-        assertEquals(12, Yatzy.threes(2, 3, 3, 3, 3));
+    public void scoring_threes_should_sum_the_dices_at_value_three() {
+        assertEquals(0, new Yatzy(1, 2, 4, 2, 4).threes());
+        assertEquals(6, new Yatzy(1, 2, 3, 2, 3).threes());
+        assertEquals(12, new Yatzy(2, 3, 3, 3, 3).threes());
     }
 
     @Test
-    public void fours() {
+    public void scoring_fours_should_sum_the_dices_at_value_four() {
         assertEquals(0, new Yatzy(5, 5, 5, 5, 5).fours());
         assertEquals(4, new Yatzy(4, 5, 5, 5, 5).fours());
         assertEquals(8, new Yatzy(4, 4, 5, 5, 5).fours());
@@ -55,7 +48,7 @@ public class YatzyTest {
     }
 
     @Test
-    public void fives() {
+    public void scoring_fives_should_sum_the_dices_at_value_five() {
         assertEquals(0, new Yatzy(4, 4, 4, 4, 4).fives());
         assertEquals(10, new Yatzy(4, 4, 4, 5, 5).fives());
         assertEquals(15, new Yatzy(4, 4, 5, 5, 5).fives());
@@ -63,7 +56,7 @@ public class YatzyTest {
     }
 
     @Test
-    public void sixes() {
+    public void scoring_sixes_should_sum_the_dices_at_value_six() {
         assertEquals(0, new Yatzy(4, 4, 4, 5, 5).sixes());
         assertEquals(6, new Yatzy(4, 4, 6, 5, 5).sixes());
         assertEquals(18, new Yatzy(6, 5, 6, 6, 5).sixes());

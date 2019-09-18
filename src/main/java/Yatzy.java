@@ -27,30 +27,16 @@ public class Yatzy {
         return 0;
     }
 
-    public static int twos(int d1, int d2, int d3, int d4, int d5) {
-        return sumSameDiceValues(2, d1, d2, d3, d4, d5);
-    }
-
-    public static int threes(int d1, int d2, int d3, int d4, int d5) {
-        return sumSameDiceValues(3, d1, d2, d3, d4, d5);
-    }
-
-    private static int sumSameDiceValues(int value, int d1, int d2, int d3, int d4, int d5) {
-        int sum = 0;
-        if (d1 == value) sum += value;
-        if (d2 == value) sum += value;
-        if (d3 == value) sum += value;
-        if (d4 == value) sum += value;
-        if (d5 == value) sum += value;
-        return sum;
-    }
-
     public int ones() {
         return sumDiceWithSameValueAs(1, this.dice);
     }
 
     public int twos() {
         return sumDiceWithSameValueAs(2, this.dice);
+    }
+
+    public int threes() {
+        return sumDiceWithSameValueAs(3, this.dice);
     }
 
     public int fours() {
@@ -63,12 +49,6 @@ public class Yatzy {
 
     public int sixes() {
         return sumDiceWithSameValueAs(6, this.dice);
-    }
-
-    private int sumDiceWithSameValueAs(int value, int[] dice) {
-        return Arrays.stream(dice)
-                .filter(die -> die == value)
-                .sum();
     }
 
     public static int onePair(int d1, int d2, int d3, int d4, int d5) {
@@ -174,5 +154,11 @@ public class Yatzy {
         tallies[d4 - 1]++;
         tallies[d5 - 1]++;
         return tallies;
+    }
+
+    private int sumDiceWithSameValueAs(int value, int[] dice) {
+        return Arrays.stream(dice)
+                .filter(die -> die == value)
+                .sum();
     }
 }
