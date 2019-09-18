@@ -46,21 +46,10 @@ public class Yatzy {
         return sumDiceWithSameValueAs(6, this.dice);
     }
 
-    public static int onePair(int d1, int d2, int d3, int d4, int d5) {
-        int[] tallies = dieOccurrences(d1, d2, d3, d4, d5);
-        for (int i = 0; i != DIE_FACES_NUMBER; i++) {
-            if (tallies[DIE_FACES_NUMBER - i - 1] >= 2) {
-                return (DIE_FACES_NUMBER - i) * 2;
-            }
-        }
-        return 0;
-    }
-
     public int onePair() {
-        int[] dieOccurrences = dieOccurrences(this.dice);
+        DieOccurrences dieOccurrences = new DieOccurrences(this.dice, DIE_FACES_NUMBER);
         for (int dieValue = DIE_FACES_NUMBER; dieValue >= 1; dieValue--) {
-            int dieOccurrence = dieOccurrences[dieValue - 1];
-            if (isPair(dieOccurrence)) {
+            if (isPair(dieOccurrences.get(dieValue))) {
                 return dieValue * 2;
             }
         }
@@ -157,19 +146,6 @@ public class Yatzy {
         tallies[d4 - 1]++;
         tallies[d5 - 1]++;
         return tallies;
-    }
-
-    private int[] dieOccurrences(int[] dice) {
-        int[] dieOccurrences = new int[DIE_FACES_NUMBER];
-        for (int die : dice) {
-            incrementDieOccurrence(die, dieOccurrences);
-        }
-        return dieOccurrences;
-    }
-
-    private void incrementDieOccurrence(int die, int[] dieOccurrences) {
-        int dieWithOffset = die - 1;
-        dieOccurrences[dieWithOffset]++;
     }
 
     private int sumDiceWithSameValueAs(int value, int[] dice) {
