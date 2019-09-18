@@ -49,6 +49,10 @@ public class Yatzy {
         return sum;
     }
 
+    public int ones() {
+        return sumDiceWithSameValueAs(1, this.dice);
+    }
+
     public int fours() {
         return sumDiceWithSameValueAs(4, this.dice);
     }

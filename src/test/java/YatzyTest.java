@@ -26,6 +26,14 @@ public class YatzyTest {
     }
 
     @Test
+    public void scoring_yatzy_final_dices_using_ones_should_sum_the_dices_at_value_one() {
+        assertEquals(0, new Yatzy(6, 2, 2, 4, 5).ones());
+        assertEquals(1, new Yatzy(1, 2, 3, 4, 5).ones());
+        assertEquals(2, new Yatzy(1, 2, 1, 4, 5).ones());
+        assertEquals(4, new Yatzy(1, 2, 1, 1, 1).ones());
+    }
+
+    @Test
     public void twos() {
         assertEquals(0, Yatzy.twos(1, 5, 3, 1, 6));
         assertEquals(4, Yatzy.twos(1, 2, 3, 2, 6));
