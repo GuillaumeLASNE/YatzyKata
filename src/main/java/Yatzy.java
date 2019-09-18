@@ -58,9 +58,10 @@ public class Yatzy {
 
     public int onePair() {
         int[] dieOccurrences = dieOccurrences(this.dice);
-        for (int i = 0; i != DIE_FACES_NUMBER; i++) {
-            if (dieOccurrences[DIE_FACES_NUMBER - i - 1] >= 2) {
-                return (DIE_FACES_NUMBER - i) * 2;
+        for (int dieValue = DIE_FACES_NUMBER; dieValue >= 1; dieValue--) {
+            int dieOccurrence = dieOccurrences[dieValue - 1];
+            if (isPair(dieOccurrence)) {
+                return dieValue * 2;
             }
         }
         return 0;
@@ -179,5 +180,9 @@ public class Yatzy {
 
     private boolean isYatzy(int[] dice) {
         return Arrays.stream(dice).allMatch(die -> dice[0] == die);
+    }
+
+    private boolean isPair(int dieOccurrence) {
+        return dieOccurrence >= 2;
     }
 }
