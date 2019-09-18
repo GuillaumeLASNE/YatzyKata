@@ -14,6 +14,10 @@ public class DieOccurrences {
         return occurrence(dieValue) >= 2;
     }
 
+    public boolean isThreeOfAKind(int dieValue) {
+        return occurrence(dieValue) >= 3;
+    }
+
     private void incrementDieOccurrence(int die) {
         dieOccurrences[die - OFFSET]++;
     }
@@ -21,5 +25,4 @@ public class DieOccurrences {
     private int occurrence(int dieValue) {
         return dieOccurrences[dieValue - OFFSET];
     }
-
 }

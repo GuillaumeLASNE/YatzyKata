@@ -61,10 +61,10 @@ public class Yatzy {
         int score = 0;
         int numberOfPair = 0;
 
-        for (int dieValue = 1; dieValue < DIE_FACES_NUMBER; dieValue++) {
+        for (int dieValue = 1; dieValue <= DIE_FACES_NUMBER; dieValue++) {
             if (dieOccurrences.isPair(dieValue)) {
                 numberOfPair++;
-                score += 2 * dieValue;
+                score += dieValue * 2;
             }
         }
 
@@ -72,11 +72,13 @@ public class Yatzy {
         else return 0;
     }
 
-    public static int threeOfAKind(int d1, int d2, int d3, int d4, int d5) {
-        int[] tallies = dieOccurrences(d1, d2, d3, d4, d5);
-        for (int i = 0; i < DIE_FACES_NUMBER; i++)
-            if (tallies[i] >= 3)
-                return (i + 1) * 3;
+    public int threeOfAKind() {
+        DieOccurrences dieOccurrences = new DieOccurrences(this.dice, DIE_FACES_NUMBER);
+        for (int dieValue = 1; dieValue <= DIE_FACES_NUMBER; dieValue++) {
+            if (dieOccurrences.isThreeOfAKind(dieValue)) {
+                return dieValue * 3;
+            }
+        }
         return 0;
     }
 
@@ -157,5 +159,4 @@ public class Yatzy {
     private boolean isYatzy(int[] dice) {
         return Arrays.stream(dice).allMatch(die -> dice[0] == die);
     }
-
 }
