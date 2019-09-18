@@ -10,11 +10,15 @@ public class DieOccurrences {
         Arrays.stream(dice).forEach(this::incrementDieOccurrence);
     }
 
+    boolean isPair(int dieValue) {
+        return occurrence(dieValue) >= 2;
+    }
+
     private void incrementDieOccurrence(int die) {
         dieOccurrences[die - OFFSET]++;
     }
 
-    public int get(int dieValue) {
+    private int occurrence(int dieValue) {
         return dieOccurrences[dieValue - OFFSET];
     }
 
