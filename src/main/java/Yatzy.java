@@ -17,18 +17,8 @@ public class Yatzy {
         return Arrays.stream(dice).sum();
     }
 
-    public static int chance(int d1, int d2, int d3, int d4, int d5) {
-        return d1 + d2 + d3 + d4 + d5;
-    }
-
-    public static int yatzy(int... dice) {
-        int[] counts = new int[6];
-        for (int die : dice)
-            counts[die - 1]++;
-        for (int i = 0; i != 6; i++)
-            if (counts[i] == 5)
-                return 50;
-        return 0;
+    public int yatzy() {
+        return isYatzy(this.dice) ? 50 : 0;
     }
 
     public int ones() {
@@ -164,5 +154,9 @@ public class Yatzy {
         return Arrays.stream(dice)
                 .filter(die -> die == value)
                 .sum();
+    }
+
+    private boolean isYatzy(int[] dice) {
+        return Arrays.stream(dice).allMatch(die -> dice[0] == die);
     }
 }

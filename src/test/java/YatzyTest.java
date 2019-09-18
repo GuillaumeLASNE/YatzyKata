@@ -6,21 +6,19 @@ public class YatzyTest {
 
     @Test
     public void chance_scores_sum_of_all_dice() {
-        assertEquals(15, Yatzy.chance(2, 3, 4, 5, 1));
-        assertEquals(16, Yatzy.chance(3, 3, 4, 5, 1));
-    }
-
-    @Test
-    public void chances_scores_sum_of_all_dice() {
         assertEquals(15, new Yatzy(2, 3, 4, 5, 1).chance());
         assertEquals(16, new Yatzy(3, 3, 4, 5, 1).chance());
     }
 
     @Test
-    public void yatzy_scores_50() {
-        assertEquals(0, Yatzy.yatzy(6, 6, 6, 6, 3));
-        assertEquals(50, Yatzy.yatzy(4, 4, 4, 4, 4));
-        assertEquals(50, Yatzy.yatzy(6, 6, 6, 6, 6));
+    public void yatzy_scores_50_if_all_dice_have_the_same_number() {
+        assertEquals(50, new Yatzy(4, 4, 4, 4, 4).yatzy());
+        assertEquals(50, new Yatzy(6, 6, 6, 6, 6).yatzy());
+    }
+
+    @Test
+    public void yatzy_scores_0_if_at_least_two_dice_have_different_numbers() {
+        assertEquals(0, new Yatzy(6, 6, 6, 6, 3).yatzy());
     }
 
     @Test
