@@ -27,10 +27,6 @@ public class Yatzy {
         return 0;
     }
 
-    public static int ones(int d1, int d2, int d3, int d4, int d5) {
-        return sumSameDiceValues(1, d1, d2, d3, d4, d5);
-    }
-
     public static int twos(int d1, int d2, int d3, int d4, int d5) {
         return sumSameDiceValues(2, d1, d2, d3, d4, d5);
     }
@@ -51,6 +47,10 @@ public class Yatzy {
 
     public int ones() {
         return sumDiceWithSameValueAs(1, this.dice);
+    }
+
+    public int twos() {
+        return sumDiceWithSameValueAs(2, this.dice);
     }
 
     public int fours() {
