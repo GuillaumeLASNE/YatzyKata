@@ -18,6 +18,10 @@ public class DieOccurrences {
         return occurrence(dieValue) >= 3;
     }
 
+    public boolean isFourOfAKind(int die) {
+        return occurrence(die) >= 4;
+    }
+
     private void incrementDieOccurrence(int die) {
         dieOccurrences[die - OFFSET]++;
     }

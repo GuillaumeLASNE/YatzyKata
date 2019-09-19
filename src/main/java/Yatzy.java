@@ -82,6 +82,16 @@ public class Yatzy {
         return 0;
     }
 
+    public int fourOfAKind() {
+        DieOccurrences dieOccurrences = new DieOccurrences(this.dice, DIE_FACES_NUMBER);
+        for (int die = 1; die <= DIE_FACES_NUMBER; die++) {
+            if (dieOccurrences.isFourOfAKind(die)) {
+                return die * 4;
+            }
+        }
+        return 0;
+    }
+
     public static int fourOfAKind(int d1, int d2, int d3, int d4, int d5) {
         int[] tallies = dieOccurrences(d1, d2, d3, d4, d5);
         for (int i = 0; i < DIE_FACES_NUMBER; i++)

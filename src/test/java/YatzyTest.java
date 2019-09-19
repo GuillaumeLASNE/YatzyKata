@@ -82,7 +82,7 @@ public class YatzyTest {
     }
 
     @Test
-    public void three_of_a_kind_scores_the_sum_three_identical_dices() {
+    public void three_of_a_kind_scores_the_sum_of_three_identical_dices() {
         assertEquals(0, new Yatzy(1, 2, 3, 5, 6).threeOfAKind());
         assertEquals(9, new Yatzy(3, 3, 3, 4, 5).threeOfAKind());
         assertEquals(9, new Yatzy(3, 3, 3, 3, 5).threeOfAKind());
@@ -95,6 +95,13 @@ public class YatzyTest {
         assertEquals(0, Yatzy.fourOfAKind(1, 2, 3, 5, 6));
         assertEquals(12, Yatzy.fourOfAKind(3, 3, 3, 3, 5));
         assertEquals(20, Yatzy.fourOfAKind(5, 5, 5, 4, 5));
+    }
+
+    @Test
+    public void four_of_a_kind_scores_the_sum_four_identical_dices() {
+        assertEquals(0, new Yatzy(1, 2, 3, 5, 6).fourOfAKind());
+        assertEquals(12, new Yatzy(3, 3, 3, 3, 5).fourOfAKind());
+        assertEquals(20, new Yatzy(5, 5, 5, 4, 5).fourOfAKind());
     }
 
     @Test
