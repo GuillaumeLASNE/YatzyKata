@@ -1,3 +1,5 @@
+package fr.lacombe.yatzy;
+
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.junit.Test;

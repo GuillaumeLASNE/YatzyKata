@@ -1,3 +1,5 @@
+package fr.lacombe.yatzy;
+
 import java.util.Arrays;
 
 public class Yatzy {
