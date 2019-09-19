@@ -105,13 +105,6 @@ public class YatzyTest {
     }
 
     @Test
-    public void large_straight() {
-        assertEquals(0, Yatzy.largeStraight(1, 2, 2, 4, 5));
-        assertEquals(20, Yatzy.largeStraight(6, 2, 3, 4, 5));
-        assertEquals(20, Yatzy.largeStraight(2, 3, 4, 5, 6));
-    }
-
-    @Test
     public void large_straight_scores_20_when_dice_contains_2_3_4_5_and_6() {
         assertEquals(0, new Yatzy(1, 2, 2, 4, 5).largeStraight());
         assertEquals(20, new Yatzy(6, 2, 3, 4, 5).largeStraight());
@@ -122,5 +115,11 @@ public class YatzyTest {
     public void full_house() {
         assertEquals(0, Yatzy.fullHouse(2, 3, 4, 5, 6));
         assertEquals(18, Yatzy.fullHouse(6, 2, 2, 2, 6));
+    }
+
+    @Test
+    public void full_house_scores_sum_of_dice_with_a_pair_and_a_three_of_a_kind() {
+        assertEquals(0, new Yatzy(2, 3, 4, 5, 6).fullHouse());
+        assertEquals(18, new Yatzy(6, 2, 2, 2, 6).fullHouse());
     }
 }

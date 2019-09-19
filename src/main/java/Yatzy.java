@@ -94,25 +94,14 @@ public class Yatzy {
 
     public int smallStraight() {
         DieOccurrences dieOccurrences = new DieOccurrences(this.dice, DIE_FACES_NUMBER);
-        if(dieOccurrences.isSmallStraight())
+        if (dieOccurrences.isSmallStraight())
             return 15;
         return 0;
     }
 
     public int largeStraight() {
         DieOccurrences dieOccurrences = new DieOccurrences(this.dice, DIE_FACES_NUMBER);
-        if(dieOccurrences.isLargeStraight())
-            return 20;
-        return 0;
-    }
-
-    public static int largeStraight(int d1, int d2, int d3, int d4, int d5) {
-        int[] tallies = dieOccurrences(d1, d2, d3, d4, d5);
-        if (tallies[1] == 1 &&
-                tallies[2] == 1 &&
-                tallies[3] == 1 &&
-                tallies[4] == 1
-                && tallies[5] == 1)
+        if (dieOccurrences.isLargeStraight())
             return 20;
         return 0;
     }
@@ -143,6 +132,24 @@ public class Yatzy {
             return twoOfAKindAt * 2 + threeOfAKindAt * 3;
         else
             return 0;
+    }
+
+    public int fullHouse() {
+        DieOccurrences dieOccurrences = new DieOccurrences(this.dice, DIE_FACES_NUMBER);
+        boolean hasThreeOfAKind = false;
+        boolean hasPair = false;
+        int score = 0;
+        for (int die = 1; die <= DIE_FACES_NUMBER; die++) {
+            if (dieOccurrences.isThreeOfAKind(die)) {
+                hasThreeOfAKind = true;
+                score += die * 3;
+            } else if (dieOccurrences.isPair(die)) {
+                hasPair = true;
+                score += die * 2;
+            }
+        }
+        if (hasPair && hasThreeOfAKind) return score;
+        else return 0;
     }
 
     private static int[] dieOccurrences(int d1, int d2, int d3, int d4, int d5) {
