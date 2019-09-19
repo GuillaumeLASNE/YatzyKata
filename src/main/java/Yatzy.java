@@ -92,11 +92,10 @@ public class Yatzy {
         return 0;
     }
 
-    public static int fourOfAKind(int d1, int d2, int d3, int d4, int d5) {
-        int[] tallies = dieOccurrences(d1, d2, d3, d4, d5);
-        for (int i = 0; i < DIE_FACES_NUMBER; i++)
-            if (tallies[i] >= 4)
-                return (i + 1) * 4;
+    public int smallStraight() {
+        DieOccurrences dieOccurrences = new DieOccurrences(this.dice, DIE_FACES_NUMBER);
+        if(dieOccurrences.isSmallStraight())
+            return 15;
         return 0;
     }
 

@@ -91,13 +91,6 @@ public class YatzyTest {
     }
 
     @Test
-    public void four_of_a_kind() {
-        assertEquals(0, Yatzy.fourOfAKind(1, 2, 3, 5, 6));
-        assertEquals(12, Yatzy.fourOfAKind(3, 3, 3, 3, 5));
-        assertEquals(20, Yatzy.fourOfAKind(5, 5, 5, 4, 5));
-    }
-
-    @Test
     public void four_of_a_kind_scores_the_sum_four_identical_dices() {
         assertEquals(0, new Yatzy(1, 2, 3, 5, 6).fourOfAKind());
         assertEquals(12, new Yatzy(3, 3, 3, 3, 5).fourOfAKind());
@@ -112,10 +105,17 @@ public class YatzyTest {
     }
 
     @Test
+    public void small_straight_scores_15_when_dice_contains_1_2_3_4_and_5() {
+        assertEquals(0, new Yatzy(1, 2, 2, 4, 5).smallStraight());
+        assertEquals(15, new Yatzy(1, 2, 3, 4, 5).smallStraight());
+        assertEquals(15, new Yatzy(2, 3, 4, 5, 1).smallStraight());
+    }
+
+    @Test
     public void large_straight() {
+        assertEquals(0, Yatzy.largeStraight(1, 2, 2, 4, 5));
         assertEquals(20, Yatzy.largeStraight(6, 2, 3, 4, 5));
         assertEquals(20, Yatzy.largeStraight(2, 3, 4, 5, 6));
-        assertEquals(0, Yatzy.largeStraight(1, 2, 2, 4, 5));
     }
 
     @Test

@@ -22,6 +22,14 @@ public class DieOccurrences {
         return occurrence(die) >= 4;
     }
 
+    public boolean isSmallStraight() {
+        return dieOccurrences[0] == 1 &&
+                dieOccurrences[1] == 1 &&
+                dieOccurrences[2] == 1 &&
+                dieOccurrences[3] == 1 &&
+                dieOccurrences[4] == 1;
+    }
+
     private void incrementDieOccurrence(int die) {
         dieOccurrences[die - OFFSET]++;
     }
