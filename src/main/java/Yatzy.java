@@ -106,34 +106,6 @@ public class Yatzy {
         return 0;
     }
 
-    public static int fullHouse(int d1, int d2, int d3, int d4, int d5) {
-        int[] tallies = dieOccurrences(d1, d2, d3, d4, d5);
-        boolean twoOfAKind = false;
-        int twoOfAKindAt = 0;
-        boolean threeOfAKind = false;
-        int threeOfAKindAt = 0;
-
-        int i;
-        for (i = 0; i != DIE_FACES_NUMBER; i++) {
-            if (tallies[i] == 2) {
-                twoOfAKind = true;
-                twoOfAKindAt = i + 1;
-            }
-        }
-
-        for (i = 0; i != DIE_FACES_NUMBER; i++) {
-            if (tallies[i] == 3) {
-                threeOfAKind = true;
-                threeOfAKindAt = i + 1;
-            }
-        }
-
-        if (twoOfAKind && threeOfAKind)
-            return twoOfAKindAt * 2 + threeOfAKindAt * 3;
-        else
-            return 0;
-    }
-
     public int fullHouse() {
         DieOccurrences dieOccurrences = new DieOccurrences(this.dice, DIE_FACES_NUMBER);
         boolean hasThreeOfAKind = false;
@@ -150,16 +122,6 @@ public class Yatzy {
         }
         if (hasPair && hasThreeOfAKind) return score;
         else return 0;
-    }
-
-    private static int[] dieOccurrences(int d1, int d2, int d3, int d4, int d5) {
-        int[] tallies = new int[DIE_FACES_NUMBER];
-        tallies[d1 - 1]++;
-        tallies[d2 - 1]++;
-        tallies[d3 - 1]++;
-        tallies[d4 - 1]++;
-        tallies[d5 - 1]++;
-        return tallies;
     }
 
     private int sumDiceWithSameValueAs(int value, int[] dice) {

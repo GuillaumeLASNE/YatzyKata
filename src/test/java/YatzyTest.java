@@ -1,19 +1,28 @@
+import junitparams.JUnitParamsRunner;
+import junitparams.Parameters;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 
+@RunWith(JUnitParamsRunner.class)
 public class YatzyTest {
 
     @Test
-    public void chance_scores_sum_of_all_dice() {
-        assertEquals(15, new Yatzy(2, 3, 4, 5, 1).chance());
-        assertEquals(16, new Yatzy(3, 3, 4, 5, 1).chance());
+    @Parameters({"2, 3, 4, 5, 1, 15", "3, 3, 4, 5, 1, 16"})
+    public void chance_scores_sum_of_all_dice(int d1, int d2, int d3, int d4, int d5, int score) {
+        Yatzy yatzy = new Yatzy(d1, d2, d3, d4, d5);
+
+        assertThat(yatzy.chance()).isEqualTo(score);
     }
 
     @Test
-    public void yatzy_scores_50_if_all_dice_have_the_same_number() {
-        assertEquals(50, new Yatzy(4, 4, 4, 4, 4).yatzy());
-        assertEquals(50, new Yatzy(6, 6, 6, 6, 6).yatzy());
+    @Parameters({"4, 4, 4, 4, 4, 50", "6, 6, 6, 6, 6, 50"})
+    public void yatzy_scores_50_if_all_dice_have_the_same_number(int d1, int d2, int d3, int d4, int d5, int score) {
+        Yatzy yatzy = new Yatzy(d1, d2, d3, d4, d5);
+
+        assertThat(yatzy.yatzy()).isEqualTo(score);
     }
 
     @Test
@@ -109,12 +118,6 @@ public class YatzyTest {
         assertEquals(0, new Yatzy(1, 2, 2, 4, 5).largeStraight());
         assertEquals(20, new Yatzy(6, 2, 3, 4, 5).largeStraight());
         assertEquals(20, new Yatzy(2, 3, 4, 5, 6).largeStraight());
-    }
-
-    @Test
-    public void full_house() {
-        assertEquals(0, Yatzy.fullHouse(2, 3, 4, 5, 6));
-        assertEquals(18, Yatzy.fullHouse(6, 2, 2, 2, 6));
     }
 
     @Test
