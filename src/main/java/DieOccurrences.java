@@ -30,6 +30,14 @@ public class DieOccurrences {
                 dieOccurrences[4] == 1;
     }
 
+    public boolean isLargeStraight() {
+        return dieOccurrences[1] == 1 &&
+                dieOccurrences[2] == 1 &&
+                dieOccurrences[3] == 1 &&
+                dieOccurrences[4] == 1 &&
+                dieOccurrences[5] == 1;
+    }
+
     private void incrementDieOccurrence(int die) {
         dieOccurrences[die - OFFSET]++;
     }

@@ -98,13 +98,6 @@ public class YatzyTest {
     }
 
     @Test
-    public void small_straight() {
-        assertEquals(0, Yatzy.smallStraight(1, 2, 2, 4, 5));
-        assertEquals(15, Yatzy.smallStraight(1, 2, 3, 4, 5));
-        assertEquals(15, Yatzy.smallStraight(2, 3, 4, 5, 1));
-    }
-
-    @Test
     public void small_straight_scores_15_when_dice_contains_1_2_3_4_and_5() {
         assertEquals(0, new Yatzy(1, 2, 2, 4, 5).smallStraight());
         assertEquals(15, new Yatzy(1, 2, 3, 4, 5).smallStraight());
@@ -116,6 +109,13 @@ public class YatzyTest {
         assertEquals(0, Yatzy.largeStraight(1, 2, 2, 4, 5));
         assertEquals(20, Yatzy.largeStraight(6, 2, 3, 4, 5));
         assertEquals(20, Yatzy.largeStraight(2, 3, 4, 5, 6));
+    }
+
+    @Test
+    public void large_straight_scores_20_when_dice_contains_2_3_4_5_and_6() {
+        assertEquals(0, new Yatzy(1, 2, 2, 4, 5).largeStraight());
+        assertEquals(20, new Yatzy(6, 2, 3, 4, 5).largeStraight());
+        assertEquals(20, new Yatzy(2, 3, 4, 5, 6).largeStraight());
     }
 
     @Test

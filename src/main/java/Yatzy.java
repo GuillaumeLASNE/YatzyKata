@@ -99,14 +99,10 @@ public class Yatzy {
         return 0;
     }
 
-    public static int smallStraight(int d1, int d2, int d3, int d4, int d5) {
-        int[] tallies = dieOccurrences(d1, d2, d3, d4, d5);
-        if (tallies[0] == 1 &&
-                tallies[1] == 1 &&
-                tallies[2] == 1 &&
-                tallies[3] == 1 &&
-                tallies[4] == 1)
-            return 15;
+    public int largeStraight() {
+        DieOccurrences dieOccurrences = new DieOccurrences(this.dice, DIE_FACES_NUMBER);
+        if(dieOccurrences.isLargeStraight())
+            return 20;
         return 0;
     }
 
