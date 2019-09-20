@@ -29,7 +29,7 @@ public class Roll {
     }
 
     public int yatzy() {
-        return isYatzy(this.dice) ? 50 : 0;
+        return isYatzy(roll) ? 50 : 0;
     }
 
     public int ones() {
@@ -140,7 +140,7 @@ public class Roll {
                 .sum();
     }
 
-    private boolean isYatzy(int[] dice) {
-        return Arrays.stream(dice).allMatch(die -> dice[0] == die);
+    private boolean isYatzy(Die[] roll) {
+        return Arrays.stream(roll).allMatch(die -> roll[0].equals(die));
     }
 }
