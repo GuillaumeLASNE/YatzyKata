@@ -62,8 +62,8 @@ If all dice have the same number,
 the player scores 50 points. 
 For example:
   
--   1,1,1,1,1 placed on "yatzy" scores 50
--   1,1,1,2,1 placed on "yatzy" scores 0
+-   1,1,1,1,1 placed on "roll" scores 50
+-   1,1,1,2,1 placed on "roll" scores 0
 
 ### Ones, Twos, Threes, Fours, Fives, Sixes: 
 The player scores the sum of the dice that reads one, 
