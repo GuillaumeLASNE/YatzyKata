@@ -30,4 +30,8 @@ public class Die {
     public int getValue() {
         return value;
     }
+
+    public boolean hasValue(int value) {
+        return this.value == value;
+    }
 }

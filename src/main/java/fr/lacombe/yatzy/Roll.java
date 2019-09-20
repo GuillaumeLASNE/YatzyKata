@@ -8,7 +8,6 @@ public class Roll {
     private final int[] dice;
     private final Die[] roll;
 
-
     public Roll(int d1, int d2, int d3, int d4, int d5) {
         dice = new int[ROLL_SIZE];
         dice[0] = d1;
@@ -25,35 +24,37 @@ public class Roll {
     }
 
     public int chance() {
-        return Arrays.stream(roll).map(Die::getValue).reduce(0, Integer::sum);
+        return Arrays.stream(roll)
+                .map(Die::getValue)
+                .reduce(0, Integer::sum);
     }
 
     public int yatzy() {
-        return isYatzy(roll) ? 50 : 0;
+        return this.isYatzy() ? 50 : 0;
     }
 
     public int ones() {
-        return sumDiceWithSameValueAs(1, this.dice);
+        return sumDiceHaving(1);
     }
 
     public int twos() {
-        return sumDiceWithSameValueAs(2, this.dice);
+        return sumDiceHaving(2);
     }
 
     public int threes() {
-        return sumDiceWithSameValueAs(3, this.dice);
+        return sumDiceHaving(3);
     }
 
     public int fours() {
-        return sumDiceWithSameValueAs(4, this.dice);
+        return sumDiceHaving(4);
     }
 
     public int fives() {
-        return sumDiceWithSameValueAs(5, this.dice);
+        return sumDiceHaving(5);
     }
 
     public int sixes() {
-        return sumDiceWithSameValueAs(6, this.dice);
+        return sumDiceHaving(6);
     }
 
     public int onePair() {
@@ -134,13 +135,15 @@ public class Roll {
         else return 0;
     }
 
-    private int sumDiceWithSameValueAs(int value, int[] dice) {
-        return Arrays.stream(dice)
-                .filter(die -> die == value)
-                .sum();
+    private int sumDiceHaving(int value) {
+        return Arrays.stream(roll)
+                .filter(die -> die.hasValue(value))
+                .map(Die::getValue)
+                .reduce(0, Integer::sum);
     }
 
-    private boolean isYatzy(Die[] roll) {
-        return Arrays.stream(roll).allMatch(die -> roll[0].equals(die));
+    private boolean isYatzy() {
+        Die firstDie = roll[0];
+        return Arrays.stream(roll).allMatch(firstDie::equals);
     }
 }
