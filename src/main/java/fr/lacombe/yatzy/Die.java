@@ -34,4 +34,8 @@ public class Die {
     public boolean hasValue(int value) {
         return this.value == value;
     }
+
+    public boolean isPair(Die nextDie) {
+        return this.equals(nextDie);
+    }
 }

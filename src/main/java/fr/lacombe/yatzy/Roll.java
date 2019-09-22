@@ -1,6 +1,8 @@
 package fr.lacombe.yatzy;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class Roll {
 
@@ -8,19 +10,19 @@ public class Roll {
     private final int[] dice;
     private final Die[] roll;
 
-    public Roll(int d1, int d2, int d3, int d4, int d5) {
+    public Roll(int die1, int die2, int die3, int die4, int die5) {
         dice = new int[ROLL_SIZE];
-        dice[0] = d1;
-        dice[1] = d2;
-        dice[3] = d4;
-        dice[2] = d3;
-        dice[4] = d5;
+        dice[0] = die1;
+        dice[1] = die2;
+        dice[3] = die4;
+        dice[2] = die3;
+        dice[4] = die5;
         roll = new Die[ROLL_SIZE];
-        roll[0] = Die.of(d1);
-        roll[1] = Die.of(d2);
-        roll[3] = Die.of(d4);
-        roll[2] = Die.of(d3);
-        roll[4] = Die.of(d5);
+        List<Integer> diceByDecreasingValues = Arrays.asList(die1, die2, die3, die4, die5);
+        diceByDecreasingValues.sort(Collections.reverseOrder());
+        for (int i = 0; i < roll.length; i++) {
+            roll[i] = Die.of(diceByDecreasingValues.get(i));
+        }
     }
 
     public int chance() {
@@ -58,10 +60,11 @@ public class Roll {
     }
 
     public int onePair() {
-        DieOccurrences dieOccurrences = new DieOccurrences(this.dice, Die.DIE_FACES_NUMBER);
-        for (int dieValue = Die.DIE_FACES_NUMBER; dieValue >= 1; dieValue--) {
-            if (dieOccurrences.isPair(dieValue)) {
-                return dieValue * 2;
+        for (int i = 0; i < roll.length - 1; i++) {
+            Die currentDie = roll[i];
+            Die nextDie = roll[i + 1];
+            if (currentDie.isPair(nextDie)) {
+                return currentDie.getValue() * 2;
             }
         }
         return 0;
