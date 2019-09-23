@@ -18,7 +18,7 @@ public class Yatzy {
     }
 
     public int chance() {
-        return Arrays.stream(dice).sum();
+        return roll.sumRollDice();
     }
 
     public int yatzy() {
