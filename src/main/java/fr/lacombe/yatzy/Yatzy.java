@@ -1,5 +1,8 @@
 package fr.lacombe.yatzy;
 
+import java.util.Collections;
+import java.util.List;
+
 public class Yatzy {
 
     private Roll roll;
@@ -58,12 +61,15 @@ public class Yatzy {
     }
 
     public int onePair() {
-        for (int dieValue = Roll.DIE_FACES_NUMBER; dieValue >= Roll.DIE_MIN_VALUE; dieValue--) {
-            if (roll.isPair(dieValue)) {
-                return dieValue * 2;
-            }
+
+        List<Integer> pairs = roll.getPairs();
+
+        if (pairs.size() == 0) {
+            return 0;
         }
-        return 0;
+
+        pairs.sort(Collections.reverseOrder());
+        return pairs.get(0) * 2;
     }
 
     public int threeOfAKind() {
@@ -85,18 +91,13 @@ public class Yatzy {
     }
 
     public int twoPair() {
-        int score = 0;
-        int numberOfPair = 0;
-
-        for (int dieValue = Roll.DIE_MIN_VALUE; dieValue <= Roll.DIE_FACES_NUMBER; dieValue++) {
-            if (roll.isPair(dieValue)) {
-                numberOfPair++;
-                score += dieValue * 2;
-            }
+        List<Integer> pairs = roll.getPairs();
+        if (pairs.size() < 2) {
+            return 0;
         }
 
-        if (numberOfPair == 2) return score;
-        else return 0;
+        return pairs.stream()
+                .reduce(0, (accumulator, dieValue) -> accumulator + dieValue * 2);
     }
 
     public int fullHouse() {

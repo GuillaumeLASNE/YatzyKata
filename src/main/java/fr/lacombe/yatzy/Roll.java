@@ -1,12 +1,16 @@
 package fr.lacombe.yatzy;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Roll {
 
-    private static final int OFFSET = 1;
-    static final int DIE_FACES_NUMBER = 6;
     public static final int DIE_MIN_VALUE = 1;
+    public static final int DIE_FACES_NUMBER = 6;
+
+    private static final int OFFSET = 1;
     private final int[] dieOccurrences;
 
     public Roll(int[] dice) {
@@ -14,8 +18,10 @@ public class Roll {
         Arrays.stream(dice).forEach(this::incrementDieOccurrence);
     }
 
-    public boolean isPair(int dieValue) {
-        return occurrence(dieValue) >= 2;
+    public List<Integer> getPairs() {
+        return IntStream.rangeClosed(DIE_MIN_VALUE, DIE_FACES_NUMBER)
+                .filter(this::isPair)
+                .boxed().collect(Collectors.toList());
     }
 
     public boolean isThreeOfAKind(int dieValue) {
@@ -59,16 +65,18 @@ public class Roll {
         return hasThreeOfAKind && hasPair;
     }
 
+    private boolean isPair(int dieValue) {
+        return occurrence(dieValue) >= 2;
+    }
+
     public int sumDiceHaving(int value) {
         return value * occurrence(value);
     }
 
     public int sumRollDice() {
-        int sum = 0;
-        for (int dieValue = DIE_MIN_VALUE; dieValue <= DIE_FACES_NUMBER; dieValue++) {
-            sum += sumDiceHaving(dieValue);
-        }
-        return sum;
+        return IntStream.rangeClosed(DIE_MIN_VALUE, DIE_FACES_NUMBER)
+                .map(this::sumDiceHaving)
+                .sum();
     }
 
     private void incrementDieOccurrence(int die) {
