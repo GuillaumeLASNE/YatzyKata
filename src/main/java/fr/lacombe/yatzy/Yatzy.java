@@ -2,6 +2,7 @@ package fr.lacombe.yatzy;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 public class Yatzy {
 
@@ -46,25 +47,33 @@ public class Yatzy {
     }
 
     public int smallStraight() {
-        if (roll.isSmallStraight()) return 15;
-        else return 0;
+        if (roll.isSmallStraight()) {
+            return 15;
+        } else {
+            return 0;
+        }
     }
 
     public int largeStraight() {
-        if (roll.isLargeStraight()) return 20;
-        else return 0;
+        if (roll.isLargeStraight()) {
+            return 20;
+        } else {
+            return 0;
+        }
     }
 
     public int yatzy() {
-        if (roll.isYatzy()) return 50;
-        else return 0;
+        if (roll.isYatzy()) {
+            return 50;
+        } else {
+            return 0;
+        }
     }
 
     public int onePair() {
-
         List<Integer> pairs = roll.getPairs();
 
-        if (pairs.size() == 0) {
+        if (pairs.size() < 1) {
             return 0;
         }
 
@@ -73,12 +82,8 @@ public class Yatzy {
     }
 
     public int threeOfAKind() {
-        for (int dieValue = Roll.DIE_MIN_VALUE; dieValue <= Roll.DIE_FACES_NUMBER; dieValue++) {
-            if (roll.isThreeOfAKind(dieValue)) {
-                return dieValue * 3;
-            }
-        }
-        return 0;
+        Optional<Integer> threeOfAKind = roll.getThreeOfAKind();
+        return threeOfAKind.map(threeOfAKindValue -> threeOfAKindValue * 3).orElse(0);
     }
 
     public int fourOfAKind() {
@@ -101,7 +106,10 @@ public class Yatzy {
     }
 
     public int fullHouse() {
-        if (roll.isFullHouse()) return roll.sumRollDice();
-        else return 0;
+        if (!roll.isFullHouse()) {
+            return 0;
+        }
+
+        return roll.sumRollDice();
     }
 }

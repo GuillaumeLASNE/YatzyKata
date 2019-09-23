@@ -2,6 +2,7 @@ package fr.lacombe.yatzy;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -24,8 +25,10 @@ public class Roll {
                 .boxed().collect(Collectors.toList());
     }
 
-    public boolean isThreeOfAKind(int dieValue) {
-        return occurrence(dieValue) >= 3;
+    public Optional<Integer> getThreeOfAKind() {
+        return IntStream.rangeClosed(DIE_MIN_VALUE, DIE_FACES_NUMBER)
+                .filter(this::isThreeOfAKind)
+                .boxed().findAny();
     }
 
     public boolean isFourOfAKind(int die) {
@@ -65,10 +68,6 @@ public class Roll {
         return hasThreeOfAKind && hasPair;
     }
 
-    private boolean isPair(int dieValue) {
-        return occurrence(dieValue) >= 2;
-    }
-
     public int sumDiceHaving(int value) {
         return value * occurrence(value);
     }
@@ -85,5 +84,13 @@ public class Roll {
 
     private int occurrence(int dieValue) {
         return dieOccurrences[dieValue - OFFSET];
+    }
+
+    private boolean isPair(int dieValue) {
+        return occurrence(dieValue) >= 2;
+    }
+
+    private boolean isThreeOfAKind(int dieValue) {
+        return occurrence(dieValue) >= 3;
     }
 }
