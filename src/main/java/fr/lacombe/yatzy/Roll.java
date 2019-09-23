@@ -8,43 +8,45 @@ import java.util.stream.IntStream;
 
 public class Roll {
 
-    public static final int DIE_MIN_VALUE = 1;
-    public static final int DIE_FACES_NUMBER = 6;
+    private static final int LOWEST_DIE_FACE = 1;
+    private static final int HIGHEST_DIE_FACE = 6;
 
     private static final int OFFSET = 1;
+
+    private static final Roll SMALL_STRAIGHT = new Roll(new int[]{1, 2, 3, 4, 5});
+    private static final Roll LARGE_STRAIGHT = new Roll(new int[]{2, 3, 4, 5, 6});
+
     private final int[] dieOccurrences;
-    private static final Roll smallStraight = new Roll(new int[]{1, 2, 3, 4, 5});
-    private static final Roll largeStraight = new Roll(new int[]{2, 3, 4, 5, 6});
 
     public Roll(int[] dice) {
-        this.dieOccurrences = new int[DIE_FACES_NUMBER];
+        this.dieOccurrences = new int[HIGHEST_DIE_FACE];
         Arrays.stream(dice).forEach(this::incrementDieOccurrence);
     }
 
     public List<Integer> getPairs() {
-        return IntStream.rangeClosed(DIE_MIN_VALUE, DIE_FACES_NUMBER)
+        return IntStream.rangeClosed(LOWEST_DIE_FACE, HIGHEST_DIE_FACE)
                 .filter(this::isPair)
                 .boxed().collect(Collectors.toList());
     }
 
     public Optional<Integer> getThreeOfAKind() {
-        return IntStream.rangeClosed(DIE_MIN_VALUE, DIE_FACES_NUMBER)
+        return IntStream.rangeClosed(LOWEST_DIE_FACE, HIGHEST_DIE_FACE)
                 .filter(this::isThreeOfAKind)
                 .boxed().findAny();
     }
 
     public Optional<Integer> getFourOfAKind() {
-        return IntStream.rangeClosed(DIE_MIN_VALUE, DIE_FACES_NUMBER)
+        return IntStream.rangeClosed(LOWEST_DIE_FACE, HIGHEST_DIE_FACE)
                 .filter(this::isFourOfAKind)
                 .boxed().findAny();
     }
 
     public boolean isSmallStraight() {
-        return smallStraight.equals(this);
+        return SMALL_STRAIGHT.equals(this);
     }
 
     public boolean isLargeStraight() {
-        return largeStraight.equals(this);
+        return LARGE_STRAIGHT.equals(this);
     }
 
     public boolean isYatzy() {
@@ -54,10 +56,10 @@ public class Roll {
     public boolean isFullHouse() {
         boolean hasThreeOfAKind = false;
         boolean hasPair = false;
-        for (int dievalue = DIE_MIN_VALUE; dievalue <= DIE_FACES_NUMBER; dievalue++) {
-            if (isThreeOfAKind(dievalue)) {
+        for (int dieValue = LOWEST_DIE_FACE; dieValue <= HIGHEST_DIE_FACE; dieValue++) {
+            if (isThreeOfAKind(dieValue)) {
                 hasThreeOfAKind = true;
-            } else if (isPair(dievalue)) {
+            } else if (isPair(dieValue)) {
                 hasPair = true;
             }
         }
@@ -69,7 +71,7 @@ public class Roll {
     }
 
     public int sumRollDice() {
-        return IntStream.rangeClosed(DIE_MIN_VALUE, DIE_FACES_NUMBER)
+        return IntStream.rangeClosed(LOWEST_DIE_FACE, HIGHEST_DIE_FACE)
                 .map(this::sumDiceHaving)
                 .sum();
     }
