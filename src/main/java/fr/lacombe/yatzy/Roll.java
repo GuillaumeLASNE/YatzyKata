@@ -6,6 +6,7 @@ public class Roll {
 
     private static final int OFFSET = 1;
     static final int DIE_FACES_NUMBER = 6;
+    public static final int DIE_MIN_VALUE = 1;
     private final int[] dieOccurrences;
 
     public Roll(int[] dice) {
@@ -48,7 +49,7 @@ public class Roll {
     public boolean isFullHouse() {
         boolean hasThreeOfAKind = false;
         boolean hasPair = false;
-        for (int dievalue = 1; dievalue <= DIE_FACES_NUMBER; dievalue++) {
+        for (int dievalue = DIE_MIN_VALUE; dievalue <= DIE_FACES_NUMBER; dievalue++) {
             if (isThreeOfAKind(dievalue)) {
                 hasThreeOfAKind = true;
             } else if (isPair(dievalue)) {
@@ -64,7 +65,7 @@ public class Roll {
 
     public int sumRollDice() {
         int sum = 0;
-        for (int dieValue = 1; dieValue <= DIE_FACES_NUMBER; dieValue++) {
+        for (int dieValue = DIE_MIN_VALUE; dieValue <= DIE_FACES_NUMBER; dieValue++) {
             sum += sumDiceHaving(dieValue);
         }
         return sum;

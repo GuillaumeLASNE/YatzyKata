@@ -18,11 +18,6 @@ public class Yatzy {
         return roll.sumRollDice();
     }
 
-    public int yatzy() {
-        if (roll.isYatzy()) return 50;
-        else return 0;
-    }
-
     public int ones() {
         return roll.sumDiceHaving(1);
     }
@@ -47,48 +42,6 @@ public class Yatzy {
         return roll.sumDiceHaving(6);
     }
 
-    public int onePair() {
-        for (int dieValue = Roll.DIE_FACES_NUMBER; dieValue >= 1; dieValue--) {
-            if (roll.isPair(dieValue)) {
-                return dieValue * 2;
-            }
-        }
-        return 0;
-    }
-
-    public int twoPair() {
-        int score = 0;
-        int numberOfPair = 0;
-
-        for (int dieValue = 1; dieValue <= Roll.DIE_FACES_NUMBER; dieValue++) {
-            if (roll.isPair(dieValue)) {
-                numberOfPair++;
-                score += dieValue * 2;
-            }
-        }
-
-        if (numberOfPair == 2) return score;
-        else return 0;
-    }
-
-    public int threeOfAKind() {
-        for (int dieValue = 1; dieValue <= Roll.DIE_FACES_NUMBER; dieValue++) {
-            if (roll.isThreeOfAKind(dieValue)) {
-                return dieValue * 3;
-            }
-        }
-        return 0;
-    }
-
-    public int fourOfAKind() {
-        for (int dieValue = 1; dieValue <= Roll.DIE_FACES_NUMBER; dieValue++) {
-            if (roll.isFourOfAKind(dieValue)) {
-                return dieValue * 4;
-            }
-        }
-        return 0;
-    }
-
     public int smallStraight() {
         if (roll.isSmallStraight()) return 15;
         else return 0;
@@ -99,9 +52,55 @@ public class Yatzy {
         else return 0;
     }
 
+    public int yatzy() {
+        if (roll.isYatzy()) return 50;
+        else return 0;
+    }
+
+    public int onePair() {
+        for (int dieValue = Roll.DIE_FACES_NUMBER; dieValue >= Roll.DIE_MIN_VALUE; dieValue--) {
+            if (roll.isPair(dieValue)) {
+                return dieValue * 2;
+            }
+        }
+        return 0;
+    }
+
+    public int threeOfAKind() {
+        for (int dieValue = Roll.DIE_MIN_VALUE; dieValue <= Roll.DIE_FACES_NUMBER; dieValue++) {
+            if (roll.isThreeOfAKind(dieValue)) {
+                return dieValue * 3;
+            }
+        }
+        return 0;
+    }
+
+    public int fourOfAKind() {
+        for (int dieValue = Roll.DIE_MIN_VALUE; dieValue <= Roll.DIE_FACES_NUMBER; dieValue++) {
+            if (roll.isFourOfAKind(dieValue)) {
+                return dieValue * 4;
+            }
+        }
+        return 0;
+    }
+
+    public int twoPair() {
+        int score = 0;
+        int numberOfPair = 0;
+
+        for (int dieValue = Roll.DIE_MIN_VALUE; dieValue <= Roll.DIE_FACES_NUMBER; dieValue++) {
+            if (roll.isPair(dieValue)) {
+                numberOfPair++;
+                score += dieValue * 2;
+            }
+        }
+
+        if (numberOfPair == 2) return score;
+        else return 0;
+    }
+
     public int fullHouse() {
         if (roll.isFullHouse()) return roll.sumRollDice();
         else return 0;
     }
-
 }
