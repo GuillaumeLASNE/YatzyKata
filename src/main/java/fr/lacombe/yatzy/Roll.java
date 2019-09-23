@@ -41,6 +41,10 @@ public class Roll {
                 dieOccurrences[5] == 1;
     }
 
+    public boolean isYatzy() {
+        return Arrays.stream(dieOccurrences).anyMatch(occurrence -> occurrence == 5);
+    }
+
     private void incrementDieOccurrence(int die) {
         dieOccurrences[die - OFFSET]++;
     }

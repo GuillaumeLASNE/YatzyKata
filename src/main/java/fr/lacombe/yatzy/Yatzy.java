@@ -22,7 +22,8 @@ public class Yatzy {
     }
 
     public int yatzy() {
-        return isYatzy(this.dice) ? 50 : 0;
+        if (roll.isYatzy()) return 50;
+        else return 0;
     }
 
     public int ones() {
@@ -92,15 +93,13 @@ public class Yatzy {
     }
 
     public int smallStraight() {
-        if (roll.isSmallStraight())
-            return 15;
-        return 0;
+        if (roll.isSmallStraight()) return 15;
+        else return 0;
     }
 
     public int largeStraight() {
-        if (roll.isLargeStraight())
-            return 20;
-        return 0;
+        if (roll.isLargeStraight()) return 20;
+        else return 0;
     }
 
     public int fullHouse() {
@@ -124,9 +123,5 @@ public class Yatzy {
         return Arrays.stream(dice)
                 .filter(die -> die == value)
                 .sum();
-    }
-
-    private boolean isYatzy(int[] dice) {
-        return Arrays.stream(dice).allMatch(die -> dice[0] == die);
     }
 }
