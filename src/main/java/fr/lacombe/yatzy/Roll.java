@@ -13,7 +13,7 @@ public class Roll {
         Arrays.stream(dice).forEach(this::incrementDieOccurrence);
     }
 
-    boolean isPair(int dieValue) {
+    public boolean isPair(int dieValue) {
         return occurrence(dieValue) >= 2;
     }
 
@@ -41,16 +41,20 @@ public class Roll {
                 dieOccurrences[5] == 1;
     }
 
-    int sumRollDice() {
-        int sum = 0;
-        for (int dieValue = 1; dieValue <= DIE_FACES_NUMBER; dieValue++) {
-            sum += occurrence(dieValue) * dieValue;
-        }
-        return sum;
-    }
-
     public boolean isYatzy() {
         return Arrays.stream(dieOccurrences).anyMatch(occurrence -> occurrence == 5);
+    }
+
+    public int sumDiceHaving(int value) {
+        return value * occurrence(value);
+    }
+
+    public int sumRollDice() {
+        int sum = 0;
+        for (int dieValue = 1; dieValue <= DIE_FACES_NUMBER; dieValue++) {
+            sum += sumDiceHaving(dieValue);
+        }
+        return sum;
     }
 
     private void incrementDieOccurrence(int die) {

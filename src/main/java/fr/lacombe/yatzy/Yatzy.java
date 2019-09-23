@@ -1,14 +1,11 @@
 package fr.lacombe.yatzy;
 
-import java.util.Arrays;
-
 public class Yatzy {
 
-    private int[] dice;
     private Roll roll;
 
     public Yatzy(int d1, int d2, int d3, int d4, int d5) {
-        dice = new int[5];
+        int[] dice = new int[5];
         dice[0] = d1;
         dice[1] = d2;
         dice[3] = d4;
@@ -27,27 +24,27 @@ public class Yatzy {
     }
 
     public int ones() {
-        return sumDiceWithSameValueAs(1, this.dice);
+        return roll.sumDiceHaving(1);
     }
 
     public int twos() {
-        return sumDiceWithSameValueAs(2, this.dice);
+        return roll.sumDiceHaving(2);
     }
 
     public int threes() {
-        return sumDiceWithSameValueAs(3, this.dice);
+        return roll.sumDiceHaving(3);
     }
 
     public int fours() {
-        return sumDiceWithSameValueAs(4, this.dice);
+        return roll.sumDiceHaving(4);
     }
 
     public int fives() {
-        return sumDiceWithSameValueAs(5, this.dice);
+        return roll.sumDiceHaving(5);
     }
 
     public int sixes() {
-        return sumDiceWithSameValueAs(6, this.dice);
+        return roll.sumDiceHaving(6);
     }
 
     public int onePair() {
@@ -119,9 +116,4 @@ public class Yatzy {
         else return 0;
     }
 
-    private int sumDiceWithSameValueAs(int value, int[] dice) {
-        return Arrays.stream(dice)
-                .filter(die -> die == value)
-                .sum();
-    }
 }
