@@ -18,6 +18,10 @@ public class Yatzy {
         roll = new Roll(dice);
     }
 
+    public Yatzy(Roll roll) {
+        this.roll = roll;
+    }
+
     public int chance() {
         return roll.sumRollDice();
     }
