@@ -4,8 +4,8 @@ import java.util.Arrays;
 
 public class Yatzy {
 
-    private static final int DIE_FACES_NUMBER = 6;
     private int[] dice;
+    private Roll roll;
 
     public Yatzy(int d1, int d2, int d3, int d4, int d5) {
         dice = new int[5];
@@ -14,6 +14,7 @@ public class Yatzy {
         dice[3] = d4;
         dice[2] = d3;
         dice[4] = d5;
+        roll = new Roll(dice);
     }
 
     public int chance() {
@@ -49,9 +50,8 @@ public class Yatzy {
     }
 
     public int onePair() {
-        DieOccurrences dieOccurrences = new DieOccurrences(this.dice, DIE_FACES_NUMBER);
-        for (int dieValue = DIE_FACES_NUMBER; dieValue >= 1; dieValue--) {
-            if (dieOccurrences.isPair(dieValue)) {
+        for (int dieValue = Roll.DIE_FACES_NUMBER; dieValue >= 1; dieValue--) {
+            if (roll.isPair(dieValue)) {
                 return dieValue * 2;
             }
         }
@@ -59,12 +59,11 @@ public class Yatzy {
     }
 
     public int twoPair() {
-        DieOccurrences dieOccurrences = new DieOccurrences(this.dice, DIE_FACES_NUMBER);
         int score = 0;
         int numberOfPair = 0;
 
-        for (int dieValue = 1; dieValue <= DIE_FACES_NUMBER; dieValue++) {
-            if (dieOccurrences.isPair(dieValue)) {
+        for (int dieValue = 1; dieValue <= Roll.DIE_FACES_NUMBER; dieValue++) {
+            if (roll.isPair(dieValue)) {
                 numberOfPair++;
                 score += dieValue * 2;
             }
@@ -75,9 +74,8 @@ public class Yatzy {
     }
 
     public int threeOfAKind() {
-        DieOccurrences dieOccurrences = new DieOccurrences(this.dice, DIE_FACES_NUMBER);
-        for (int dieValue = 1; dieValue <= DIE_FACES_NUMBER; dieValue++) {
-            if (dieOccurrences.isThreeOfAKind(dieValue)) {
+        for (int dieValue = 1; dieValue <= Roll.DIE_FACES_NUMBER; dieValue++) {
+            if (roll.isThreeOfAKind(dieValue)) {
                 return dieValue * 3;
             }
         }
@@ -85,9 +83,8 @@ public class Yatzy {
     }
 
     public int fourOfAKind() {
-        DieOccurrences dieOccurrences = new DieOccurrences(this.dice, DIE_FACES_NUMBER);
-        for (int die = 1; die <= DIE_FACES_NUMBER; die++) {
-            if (dieOccurrences.isFourOfAKind(die)) {
+        for (int die = 1; die <= Roll.DIE_FACES_NUMBER; die++) {
+            if (roll.isFourOfAKind(die)) {
                 return die * 4;
             }
         }
@@ -95,29 +92,26 @@ public class Yatzy {
     }
 
     public int smallStraight() {
-        DieOccurrences dieOccurrences = new DieOccurrences(this.dice, DIE_FACES_NUMBER);
-        if (dieOccurrences.isSmallStraight())
+        if (roll.isSmallStraight())
             return 15;
         return 0;
     }
 
     public int largeStraight() {
-        DieOccurrences dieOccurrences = new DieOccurrences(this.dice, DIE_FACES_NUMBER);
-        if (dieOccurrences.isLargeStraight())
+        if (roll.isLargeStraight())
             return 20;
         return 0;
     }
 
     public int fullHouse() {
-        DieOccurrences dieOccurrences = new DieOccurrences(this.dice, DIE_FACES_NUMBER);
         boolean hasThreeOfAKind = false;
         boolean hasPair = false;
         int score = 0;
-        for (int die = 1; die <= DIE_FACES_NUMBER; die++) {
-            if (dieOccurrences.isThreeOfAKind(die)) {
+        for (int die = 1; die <= Roll.DIE_FACES_NUMBER; die++) {
+            if (roll.isThreeOfAKind(die)) {
                 hasThreeOfAKind = true;
                 score += die * 3;
-            } else if (dieOccurrences.isPair(die)) {
+            } else if (roll.isPair(die)) {
                 hasPair = true;
                 score += die * 2;
             }

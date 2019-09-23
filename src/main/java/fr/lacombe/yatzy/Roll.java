@@ -2,13 +2,14 @@ package fr.lacombe.yatzy;
 
 import java.util.Arrays;
 
-public class DieOccurrences {
+public class Roll {
 
     private static final int OFFSET = 1;
+    static final int DIE_FACES_NUMBER = 6;
     private final int[] dieOccurrences;
 
-    public DieOccurrences(int[] dice, int dieFacesNumber) {
-        this.dieOccurrences = new int[dieFacesNumber];
+    public Roll(int[] dice) {
+        this.dieOccurrences = new int[DIE_FACES_NUMBER];
         Arrays.stream(dice).forEach(this::incrementDieOccurrence);
     }
 
