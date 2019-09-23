@@ -87,12 +87,8 @@ public class Yatzy {
     }
 
     public int fourOfAKind() {
-        for (int dieValue = Roll.DIE_MIN_VALUE; dieValue <= Roll.DIE_FACES_NUMBER; dieValue++) {
-            if (roll.isFourOfAKind(dieValue)) {
-                return dieValue * 4;
-            }
-        }
-        return 0;
+        Optional<Integer> fourOfAKind = roll.getFourOfAKind();
+        return fourOfAKind.map(fourOfAKindValue -> fourOfAKindValue * 4).orElse(0);
     }
 
     public int twoPair() {

@@ -13,6 +13,8 @@ public class Roll {
 
     private static final int OFFSET = 1;
     private final int[] dieOccurrences;
+    private static final Roll smallStraight = new Roll(new int[]{1, 2, 3, 4, 5});
+    private static final Roll largeStraight = new Roll(new int[]{2, 3, 4, 5, 6});
 
     public Roll(int[] dice) {
         this.dieOccurrences = new int[DIE_FACES_NUMBER];
@@ -31,24 +33,18 @@ public class Roll {
                 .boxed().findAny();
     }
 
-    public boolean isFourOfAKind(int die) {
-        return occurrence(die) >= 4;
+    public Optional<Integer> getFourOfAKind() {
+        return IntStream.rangeClosed(DIE_MIN_VALUE, DIE_FACES_NUMBER)
+                .filter(this::isFourOfAKind)
+                .boxed().findAny();
     }
 
     public boolean isSmallStraight() {
-        return dieOccurrences[0] == 1 &&
-                dieOccurrences[1] == 1 &&
-                dieOccurrences[2] == 1 &&
-                dieOccurrences[3] == 1 &&
-                dieOccurrences[4] == 1;
+        return smallStraight.equals(this);
     }
 
     public boolean isLargeStraight() {
-        return dieOccurrences[1] == 1 &&
-                dieOccurrences[2] == 1 &&
-                dieOccurrences[3] == 1 &&
-                dieOccurrences[4] == 1 &&
-                dieOccurrences[5] == 1;
+        return largeStraight.equals(this);
     }
 
     public boolean isYatzy() {
@@ -78,6 +74,19 @@ public class Roll {
                 .sum();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Roll)) return false;
+        Roll roll = (Roll) o;
+        return Arrays.equals(dieOccurrences, roll.dieOccurrences);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(dieOccurrences);
+    }
+
     private void incrementDieOccurrence(int die) {
         dieOccurrences[die - OFFSET]++;
     }
@@ -92,5 +101,9 @@ public class Roll {
 
     private boolean isThreeOfAKind(int dieValue) {
         return occurrence(dieValue) >= 3;
+    }
+
+    private boolean isFourOfAKind(int die) {
+        return occurrence(die) >= 4;
     }
 }
