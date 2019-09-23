@@ -81,9 +81,9 @@ public class Yatzy {
     }
 
     public int fourOfAKind() {
-        for (int die = 1; die <= Roll.DIE_FACES_NUMBER; die++) {
-            if (roll.isFourOfAKind(die)) {
-                return die * 4;
+        for (int dieValue = 1; dieValue <= Roll.DIE_FACES_NUMBER; dieValue++) {
+            if (roll.isFourOfAKind(dieValue)) {
+                return dieValue * 4;
             }
         }
         return 0;
@@ -100,19 +100,7 @@ public class Yatzy {
     }
 
     public int fullHouse() {
-        boolean hasThreeOfAKind = false;
-        boolean hasPair = false;
-        int score = 0;
-        for (int die = 1; die <= Roll.DIE_FACES_NUMBER; die++) {
-            if (roll.isThreeOfAKind(die)) {
-                hasThreeOfAKind = true;
-                score += die * 3;
-            } else if (roll.isPair(die)) {
-                hasPair = true;
-                score += die * 2;
-            }
-        }
-        if (hasPair && hasThreeOfAKind) return score;
+        if (roll.isFullHouse()) return roll.sumRollDice();
         else return 0;
     }
 

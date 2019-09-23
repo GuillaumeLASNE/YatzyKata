@@ -45,6 +45,19 @@ public class Roll {
         return Arrays.stream(dieOccurrences).anyMatch(occurrence -> occurrence == 5);
     }
 
+    public boolean isFullHouse() {
+        boolean hasThreeOfAKind = false;
+        boolean hasPair = false;
+        for (int dievalue = 1; dievalue <= DIE_FACES_NUMBER; dievalue++) {
+            if (isThreeOfAKind(dievalue)) {
+                hasThreeOfAKind = true;
+            } else if (isPair(dievalue)) {
+                hasPair = true;
+            }
+        }
+        return hasThreeOfAKind && hasPair;
+    }
+
     public int sumDiceHaving(int value) {
         return value * occurrence(value);
     }
