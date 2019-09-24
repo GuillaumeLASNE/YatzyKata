@@ -1,6 +1,5 @@
 package fr.lacombe.yatzy;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,17 +36,6 @@ public class Yatzy {
         } else {
             return 0;
         }
-    }
-
-    public int onePair() {
-        List<Integer> pairs = roll.getPairs();
-
-        if (pairs.size() < 1) {
-            return 0;
-        }
-
-        pairs.sort(Collections.reverseOrder());
-        return pairs.get(0) * 2;
     }
 
     public int threeOfAKind() {

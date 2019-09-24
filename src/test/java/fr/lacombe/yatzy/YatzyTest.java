@@ -154,9 +154,9 @@ class YatzyTest {
     @ParameterizedTest
     @MethodSource("one_pair_source")
     void one_pair_scores_the_sum_of_the_highest_matching_pair(Roll roll, int score) {
-        Yatzy yatzy = new Yatzy(roll);
+        Yatzy yatzy = new Yatzy(new OnePairScoringRule(), roll);
 
-        assertThat(yatzy.onePair()).isEqualTo(score);
+        assertThat(yatzy.score()).isEqualTo(score);
     }
 
     private static Stream<Arguments> one_pair_source() {
