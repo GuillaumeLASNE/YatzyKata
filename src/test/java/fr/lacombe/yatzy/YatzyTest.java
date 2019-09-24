@@ -14,8 +14,8 @@ class YatzyTest {
     @ParameterizedTest
     @MethodSource("chance_source")
     void chance_scores_sum_of_all_dice(Roll roll, int score) {
-        ScoringRule chance = new ChanceScoringRole();
-        Yatzy yatzy = new Yatzy(roll, chance);
+        ScoringRule chanceScoringRule = new ChanceScoringRole();
+        Yatzy yatzy = new Yatzy(chanceScoringRule, roll);
 
         assertThat(yatzy.score()).isEqualTo(score);
     }
@@ -30,9 +30,10 @@ class YatzyTest {
     @ParameterizedTest
     @MethodSource("yatzy_source")
     void yatzy_scores_50_if_all_dice_have_the_same_number(Roll roll, int score) {
-        Yatzy yatzy = new Yatzy(roll);
+        ScoringRule yatzyScoringRule = new YatzyScoringRule();
+        Yatzy yatzy = new Yatzy(yatzyScoringRule, roll);
 
-        assertThat(yatzy.yatzy()).isEqualTo(score);
+        assertThat(yatzy.score()).isEqualTo(score);
     }
 
     private static Stream<Arguments> yatzy_source() {
@@ -44,9 +45,11 @@ class YatzyTest {
 
     @Test
     void yatzy_scores_0_if_at_least_two_dice_have_different_numbers() {
-        Yatzy yatzy = new Yatzy(new Roll(new int[]{6, 6, 6, 6, 3}));
+        Roll rollHavingDiceWithDifferentValues = new Roll(new int[]{6, 6, 6, 6, 3});
 
-        assertThat(yatzy.yatzy()).isEqualTo(0);
+        Yatzy yatzy = new Yatzy(new YatzyScoringRule(), rollHavingDiceWithDifferentValues);
+
+        assertThat(yatzy.score()).isEqualTo(0);
     }
 
     @ParameterizedTest

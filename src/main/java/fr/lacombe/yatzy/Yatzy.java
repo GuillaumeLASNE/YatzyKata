@@ -6,18 +6,17 @@ import java.util.Optional;
 
 public class Yatzy {
 
-    private Roll roll;
     private final ScoringRule scoringRule;
+    private Roll roll;
 
     public Yatzy(Roll roll) {
         this.roll = roll;
         scoringRule = null;
     }
 
-    public Yatzy(Roll roll, ScoringRule scoringRule) {
-
-        this.roll = roll;
+    public Yatzy(ScoringRule scoringRule, Roll roll) {
         this.scoringRule = scoringRule;
+        this.roll = roll;
     }
 
     public int score() {
@@ -59,14 +58,6 @@ public class Yatzy {
     public int largeStraight() {
         if (roll.isLargeStraight()) {
             return 20;
-        } else {
-            return 0;
-        }
-    }
-
-    public int yatzy() {
-        if (roll.isYatzy()) {
-            return 50;
         } else {
             return 0;
         }
