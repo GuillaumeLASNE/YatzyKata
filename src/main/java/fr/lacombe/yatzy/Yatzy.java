@@ -7,13 +7,21 @@ import java.util.Optional;
 public class Yatzy {
 
     private Roll roll;
+    private final ScoringRule scoringRule;
 
     public Yatzy(Roll roll) {
         this.roll = roll;
+        scoringRule = null;
     }
 
-    public int chance() {
-        return roll.sumRollDice();
+    public Yatzy(Roll roll, ScoringRule scoringRule) {
+
+        this.roll = roll;
+        this.scoringRule = scoringRule;
+    }
+
+    public int score() {
+        return scoringRule.score(roll);
     }
 
     public int ones() {

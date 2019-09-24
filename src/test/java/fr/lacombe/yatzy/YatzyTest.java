@@ -14,9 +14,10 @@ class YatzyTest {
     @ParameterizedTest
     @MethodSource("chance_source")
     void chance_scores_sum_of_all_dice(Roll roll, int score) {
-        Yatzy yatzy = new Yatzy(roll);
+        ScoringRule chance = new ChanceScoringRole();
+        Yatzy yatzy = new Yatzy(roll, chance);
 
-        assertThat(yatzy.chance()).isEqualTo(score);
+        assertThat(yatzy.score()).isEqualTo(score);
     }
 
     private static Stream<Arguments> chance_source() {
