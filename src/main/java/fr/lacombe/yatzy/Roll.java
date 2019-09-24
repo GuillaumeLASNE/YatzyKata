@@ -23,6 +23,16 @@ public class Roll {
         Arrays.stream(dice).forEach(this::incrementDieOccurrence);
     }
 
+    public static Roll of(Die die1, Die die2, Die die3, Die die4, Die die5) {
+        return new Roll(new int[]{
+                die1.getValue(),
+                die2.getValue(),
+                die3.getValue(),
+                die4.getValue(),
+                die5.getValue()
+        });
+    }
+
     public List<Integer> getPairs() {
         return IntStream.rangeClosed(LOWEST_DIE_FACE, HIGHEST_DIE_FACE)
                 .filter(this::isPair)
