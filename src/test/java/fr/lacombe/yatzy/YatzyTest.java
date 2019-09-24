@@ -1,6 +1,9 @@
 package fr.lacombe.yatzy;
 
-import fr.lacombe.yatzy.scoring.rule.*;
+import fr.lacombe.yatzy.scoring.rule.FourOfAKindScoringRule;
+import fr.lacombe.yatzy.scoring.rule.FullHouseScoringRule;
+import fr.lacombe.yatzy.scoring.rule.LargeStraightScoringRule;
+import fr.lacombe.yatzy.scoring.rule.SmallStraightScoringRule;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -10,24 +13,6 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class YatzyTest {
-    @ParameterizedTest
-    @MethodSource("three_of_a_kind_source")
-    void three_of_a_kind_scores_the_sum_of_three_identical_dices(Roll roll, int score) {
-        Yatzy yatzy = new Yatzy(new ThreeOfAKindScoringRule(), roll);
-
-        assertThat(yatzy.score()).isEqualTo(score);
-    }
-
-    private static Stream<Arguments> three_of_a_kind_source() {
-        return Stream.of(
-                Arguments.of(new Roll(new int[]{1, 2, 3, 5, 6}), 0),
-                Arguments.of(new Roll(new int[]{3, 3, 3, 4, 5}), 9),
-                Arguments.of(new Roll(new int[]{3, 3, 3, 3, 5}), 9),
-                Arguments.of(new Roll(new int[]{3, 3, 3, 3, 3}), 9),
-                Arguments.of(new Roll(new int[]{5, 3, 5, 4, 5}), 15)
-        );
-    }
-
     @ParameterizedTest
     @MethodSource("four_of_a_kind_source")
     void four_of_a_kind_scores_the_sum_four_identical_dices(Roll roll, int score) {
