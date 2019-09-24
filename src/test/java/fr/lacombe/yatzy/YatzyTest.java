@@ -12,22 +12,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class YatzyTest {
 
-    @ParameterizedTest
-    @MethodSource("yatzy_source")
-    void yatzy_scores_50_if_all_dice_have_the_same_number(Roll roll, int score) {
-        ScoringRule yatzyScoringRule = new YatzyScoringRule();
-        Yatzy yatzy = new Yatzy(yatzyScoringRule, roll);
-
-        assertThat(yatzy.score()).isEqualTo(score);
-    }
-
-    private static Stream<Arguments> yatzy_source() {
-        return Stream.of(
-                Arguments.of(new Roll(new int[]{4, 4, 4, 4, 4}), 50),
-                Arguments.of(new Roll(new int[]{6, 6, 6, 6, 6}), 50)
-        );
-    }
-
     @Test
     void yatzy_scores_0_if_at_least_two_dice_have_different_numbers() {
         Roll rollHavingDiceWithDifferentValues = new Roll(new int[]{6, 6, 6, 6, 3});
