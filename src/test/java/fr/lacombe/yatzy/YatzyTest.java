@@ -43,7 +43,7 @@ class YatzyTest {
 
     @Test
     void yatzy_scores_0_if_at_least_two_dice_have_different_numbers() {
-        Yatzy yatzy = new Yatzy(6, 6, 6, 6, 3);
+        Yatzy yatzy = new Yatzy(new Roll(new int[]{6, 6, 6, 6, 3}));
 
         assertThat(yatzy.yatzy()).isEqualTo(0);
     }
