@@ -37,11 +37,6 @@ public class Yatzy {
         }
     }
 
-    public int threeOfAKind() {
-        Optional<Integer> threeOfAKind = roll.getThreeOfAKind();
-        return threeOfAKind.map(threeOfAKindValue -> threeOfAKindValue * 3).orElse(0);
-    }
-
     public int fourOfAKind() {
         Optional<Integer> fourOfAKind = roll.getFourOfAKind();
         return fourOfAKind.map(fourOfAKindValue -> fourOfAKindValue * 4).orElse(0);
