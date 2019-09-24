@@ -94,6 +94,7 @@ class ByDieValueScoringRuleTest {
     @MethodSource("sixes_source")
     void sixes_scores_sum_of_dice_at_value_six(Roll roll, int score) {
         ScoringRule sixesScoringRule = new ByDieValueScoringRule(SIX);
+
         assertThat(sixesScoringRule.score(roll)).isEqualTo(score);
     }
 

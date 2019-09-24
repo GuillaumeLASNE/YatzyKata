@@ -15,6 +15,7 @@ class SmallStraightScoringRuleTest {
     @MethodSource("small_straight_source")
     void small_straight_scores_15_when_dice_contains_1_2_3_4_and_5(Roll roll, int score) {
         ScoringRule smallStraightScoringRule = new SmallStraightScoringRule();
+
         assertThat(smallStraightScoringRule.score(roll)).isEqualTo(score);
     }
 

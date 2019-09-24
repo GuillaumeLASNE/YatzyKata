@@ -15,6 +15,7 @@ class LargeStraightScoringRuleTest {
     @MethodSource("large_straight_source")
     void large_straight_scores_20_when_dice_contains_2_3_4_5_and_6(Roll roll, int score) {
         ScoringRule largeStraightScoringRule = new LargeStraightScoringRule();
+
         assertThat(largeStraightScoringRule.score(roll)).isEqualTo(score);
     }
 

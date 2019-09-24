@@ -15,6 +15,7 @@ class ThreeOfAKindScoringRuleTest {
     @MethodSource("three_of_a_kind_source")
     void three_of_a_kind_scores_the_sum_of_three_identical_dices(Roll roll, int score) {
         ScoringRule threeOfAKindScoringRule = new ThreeOfAKindScoringRule();
+
         assertThat(threeOfAKindScoringRule.score(roll)).isEqualTo(score);
     }
 

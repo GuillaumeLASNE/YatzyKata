@@ -15,6 +15,7 @@ class TwoPairScoringRuleTest {
     @MethodSource("two_pair_source")
     void two_pair_scores_the_sum_of_each_pairs(Roll roll, int score) {
         ScoringRule twoPairScoringRule = new TwoPairScoringRule();
+
         assertThat(twoPairScoringRule.score(roll)).isEqualTo(score);
     }
 
@@ -25,5 +26,4 @@ class TwoPairScoringRuleTest {
                 Arguments.of(Roll.of(THREE, THREE, FIVE, FIVE, FIVE), 16)
         );
     }
-
 }

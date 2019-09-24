@@ -15,6 +15,7 @@ class FullHouseScoringRuleTest {
     @MethodSource("full_house_source")
     void full_house_scores_sum_of_dice_with_a_pair_and_a_three_of_a_kind(Roll roll, int score) {
         ScoringRule fullHouseScoringRule = new FullHouseScoringRule();
+
         assertThat(fullHouseScoringRule.score(roll)).isEqualTo(score);
     }
 

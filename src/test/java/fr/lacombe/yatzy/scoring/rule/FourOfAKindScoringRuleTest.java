@@ -15,6 +15,7 @@ class FourOfAKindScoringRuleTest {
     @MethodSource("four_of_a_kind_source")
     void four_of_a_kind_scores_the_sum_four_identical_dices(Roll roll, int score) {
         ScoringRule fourOfAKindScoringRule = new FourOfAKindScoringRule();
+
         assertThat(fourOfAKindScoringRule.score(roll)).isEqualTo(score);
     }
 
