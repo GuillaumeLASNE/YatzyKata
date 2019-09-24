@@ -72,9 +72,9 @@ class YatzyTest {
     @ParameterizedTest
     @MethodSource("twos_source")
     void twos_scores_sum_of_dice_at_value_two(Roll roll, int score) {
-        Yatzy yatzy = new Yatzy(roll);
+        Yatzy yatzy = new Yatzy(new TwosScoringRule(), roll);
 
-        assertThat(yatzy.twos()).isEqualTo(score);
+        assertThat(yatzy.score()).isEqualTo(score);
     }
 
     private static Stream<Arguments> twos_source() {

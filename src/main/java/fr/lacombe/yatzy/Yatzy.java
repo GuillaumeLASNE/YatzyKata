@@ -23,10 +23,6 @@ public class Yatzy {
         return scoringRule.score(roll);
     }
 
-    public int twos() {
-        return roll.sumDiceHaving(2);
-    }
-
     public int threes() {
         return roll.sumDiceHaving(3);
     }
