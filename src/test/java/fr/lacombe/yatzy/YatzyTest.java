@@ -138,9 +138,9 @@ class YatzyTest {
     @ParameterizedTest
     @MethodSource("sixes_source")
     void sixes_scores_sum_of_dice_at_value_six(Roll roll, int score) {
-        Yatzy yatzy = new Yatzy(roll);
+        Yatzy yatzy = new Yatzy(new SixesScoringRule(), roll);
 
-        assertThat(yatzy.sixes()).isEqualTo(score);
+        assertThat(yatzy.score()).isEqualTo(score);
     }
 
     private static Stream<Arguments> sixes_source() {

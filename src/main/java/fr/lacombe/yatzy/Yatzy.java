@@ -23,10 +23,6 @@ public class Yatzy {
         return scoringRule.score(roll);
     }
 
-    public int sixes() {
-        return roll.sumDiceHaving(6);
-    }
-
     public int smallStraight() {
         if (roll.isSmallStraight()) {
             return 15;
