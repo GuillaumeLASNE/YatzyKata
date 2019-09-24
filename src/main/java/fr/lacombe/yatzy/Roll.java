@@ -6,6 +6,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static fr.lacombe.yatzy.Die.*;
+
 public class Roll {
 
     private static final int LOWEST_DIE_FACE = 1;
@@ -13,24 +15,18 @@ public class Roll {
 
     private static final int OFFSET = 1;
 
-    private static final Roll SMALL_STRAIGHT = new Roll(new int[]{1, 2, 3, 4, 5});
-    private static final Roll LARGE_STRAIGHT = new Roll(new int[]{2, 3, 4, 5, 6});
+    private static final Roll SMALL_STRAIGHT = new Roll(new Die[]{ONE, TWO, THREE, FOUR, FIVE});
+    private static final Roll LARGE_STRAIGHT = new Roll(new Die[]{TWO, THREE, FOUR, FIVE, SIX});
 
     private final int[] dieOccurrences;
 
-    public Roll(int[] dice) {
+    public Roll(Die[] dice) {
         this.dieOccurrences = new int[HIGHEST_DIE_FACE];
         Arrays.stream(dice).forEach(this::incrementDieOccurrence);
     }
 
     public static Roll of(Die die1, Die die2, Die die3, Die die4, Die die5) {
-        return new Roll(new int[]{
-                die1.getValue(),
-                die2.getValue(),
-                die3.getValue(),
-                die4.getValue(),
-                die5.getValue()
-        });
+        return new Roll(new Die[]{die1, die2, die3, die4, die5});
     }
 
     public List<Integer> getPairs() {
@@ -106,8 +102,8 @@ public class Roll {
                 '}';
     }
 
-    private void incrementDieOccurrence(int die) {
-        dieOccurrences[die - OFFSET]++;
+    private void incrementDieOccurrence(Die die) {
+        dieOccurrences[die.getValue() - OFFSET]++;
     }
 
     private int occurrence(int dieValue) {
@@ -122,7 +118,7 @@ public class Roll {
         return occurrence(dieValue) >= 3;
     }
 
-    private boolean isFourOfAKind(int die) {
-        return occurrence(die) >= 4;
+    private boolean isFourOfAKind(int dieValue) {
+        return occurrence(dieValue) >= 4;
     }
 }
