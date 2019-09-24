@@ -221,9 +221,9 @@ class YatzyTest {
     @ParameterizedTest
     @MethodSource("small_straight_source")
     void small_straight_scores_15_when_dice_contains_1_2_3_4_and_5(Roll roll, int score) {
-        Yatzy yatzy = new Yatzy(roll);
+        Yatzy yatzy = new Yatzy(new SmallStraightScoringRule(), roll);
 
-        assertThat(yatzy.smallStraight()).isEqualTo(score);
+        assertThat(yatzy.score()).isEqualTo(score);
     }
 
     private static Stream<Arguments> small_straight_source() {
