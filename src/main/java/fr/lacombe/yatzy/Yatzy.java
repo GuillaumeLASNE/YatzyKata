@@ -19,14 +19,6 @@ public class Yatzy {
         return scoringRule.score(roll);
     }
 
-    public int largeStraight() {
-        if (roll.isLargeStraight()) {
-            return 20;
-        } else {
-            return 0;
-        }
-    }
-
     public int fullHouse() {
         if (!roll.isFullHouse()) {
             return 0;

@@ -238,9 +238,9 @@ class YatzyTest {
     @ParameterizedTest
     @MethodSource("large_straight_source")
     void large_straight_scores_20_when_dice_contains_2_3_4_5_and_6(Roll roll, int score) {
-        Yatzy yatzy = new Yatzy(roll);
+        Yatzy yatzy = new Yatzy(new LargeStraightScoringRule(), roll);
 
-        assertThat(yatzy.largeStraight()).isEqualTo(score);
+        assertThat(yatzy.score()).isEqualTo(score);
     }
 
     private static Stream<Arguments> large_straight_source() {
