@@ -254,9 +254,9 @@ class YatzyTest {
     @ParameterizedTest
     @MethodSource("full_house_source")
     void full_house_scores_sum_of_dice_with_a_pair_and_a_three_of_a_kind(Roll roll, int score) {
-        Yatzy yatzy = new Yatzy(roll);
+        Yatzy yatzy = new Yatzy(new FullHouseScoringRule(), roll);
 
-        assertThat(yatzy.fullHouse()).isEqualTo(score);
+        assertThat(yatzy.score()).isEqualTo(score);
     }
 
     private static Stream<Arguments> full_house_source() {
