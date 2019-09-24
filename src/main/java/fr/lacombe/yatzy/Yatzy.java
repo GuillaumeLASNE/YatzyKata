@@ -1,5 +1,7 @@
 package fr.lacombe.yatzy;
 
+import fr.lacombe.yatzy.scoring.rule.ScoringRule;
+
 public class Yatzy {
 
     private final ScoringRule scoringRule;

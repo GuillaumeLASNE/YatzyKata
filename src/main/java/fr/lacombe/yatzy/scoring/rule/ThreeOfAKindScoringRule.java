@@ -1,4 +1,6 @@
-package fr.lacombe.yatzy;
+package fr.lacombe.yatzy.scoring.rule;
+
+import fr.lacombe.yatzy.Roll;
 
 import java.util.Optional;
 

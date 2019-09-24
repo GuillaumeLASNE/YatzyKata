@@ -1,5 +1,6 @@
 package fr.lacombe.yatzy;
 
+import fr.lacombe.yatzy.scoring.rule.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -14,7 +15,7 @@ class YatzyTest {
     @ParameterizedTest
     @MethodSource("chance_source")
     void chance_scores_sum_of_all_dice(Roll roll, int score) {
-        ScoringRule chanceScoringRule = new ChanceScoringRole();
+        ScoringRule chanceScoringRule = new ChanceScoringRule();
         Yatzy yatzy = new Yatzy(chanceScoringRule, roll);
 
         assertThat(yatzy.score()).isEqualTo(score);
