@@ -1,6 +1,5 @@
 package fr.lacombe.yatzy.scoring.rule;
 
-import fr.lacombe.yatzy.Die;
 import fr.lacombe.yatzy.Roll;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -8,6 +7,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
+import static fr.lacombe.yatzy.Die.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LargeStraightScoringRuleTest {
@@ -20,38 +20,9 @@ class LargeStraightScoringRuleTest {
 
     private static Stream<Arguments> large_straight_source() {
         return Stream.of(
-                Arguments.of(
-                        Roll.of(
-                                Die.valueOf(1),
-                                Die.valueOf(2),
-                                Die.valueOf(2),
-                                Die.valueOf(4),
-                                Die.valueOf(5)
-                        ),
-                        0
-                ),
-                Arguments.of(
-                        Roll.of(
-                                Die.valueOf(6),
-                                Die.valueOf(2),
-                                Die.valueOf(3),
-                                Die.valueOf(4),
-                                Die.valueOf(5)
-                        ),
-                        20
-                ),
-                Arguments.of(
-                        Roll.of(
-                                Die.valueOf(2),
-                                Die.valueOf(3),
-                                Die.valueOf(4),
-                                Die.valueOf(5),
-                                Die.valueOf(6)
-                        ),
-                        20
-                )
+                Arguments.of(Roll.of(ONE, TWO, TWO, FOUR, FIVE), 0),
+                Arguments.of(Roll.of(SIX, TWO, THREE, FOUR, FIVE), 20),
+                Arguments.of(Roll.of(TWO, THREE, FOUR, FIVE, SIX), 20)
         );
     }
-
-
 }
