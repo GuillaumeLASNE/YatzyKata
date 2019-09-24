@@ -1,7 +1,6 @@
 package fr.lacombe.yatzy;
 
 import fr.lacombe.yatzy.scoring.rule.FullHouseScoringRule;
-import fr.lacombe.yatzy.scoring.rule.LargeStraightScoringRule;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -11,24 +10,6 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class YatzyTest {
-
-
-    @ParameterizedTest
-    @MethodSource("large_straight_source")
-    void large_straight_scores_20_when_dice_contains_2_3_4_5_and_6(Roll roll, int score) {
-        Yatzy yatzy = new Yatzy(new LargeStraightScoringRule(), roll);
-
-        assertThat(yatzy.score()).isEqualTo(score);
-    }
-
-    private static Stream<Arguments> large_straight_source() {
-        return Stream.of(
-                Arguments.of(new Roll(new int[]{1, 2, 2, 4, 5}), 0),
-                Arguments.of(new Roll(new int[]{6, 2, 3, 4, 5}), 20),
-                Arguments.of(new Roll(new int[]{2, 3, 4, 5, 6}), 20)
-        );
-    }
-
     @ParameterizedTest
     @MethodSource("full_house_source")
     void full_house_scores_sum_of_dice_with_a_pair_and_a_three_of_a_kind(Roll roll, int score) {
