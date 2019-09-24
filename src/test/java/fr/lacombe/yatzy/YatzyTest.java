@@ -13,38 +13,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 class YatzyTest {
 
     @ParameterizedTest
-    @MethodSource("chance_source")
-    void chance_scores_sum_of_all_dice(Roll roll, int expectedScore) {
-        ScoringRule chanceScoringRule = new ChanceScoringRule();
-        Yatzy yatzy = new Yatzy(chanceScoringRule, roll);
-
-        assertThat(yatzy.score()).isEqualTo(expectedScore);
-    }
-
-    private static Stream<Arguments> chance_source() {
-        return Stream.of(
-                Arguments.of(
-                        Roll.of(
-                                Die.valueOf(2),
-                                Die.valueOf(3),
-                                Die.valueOf(4),
-                                Die.valueOf(5),
-                                Die.valueOf(1)),
-                        15),
-                Arguments.of(
-                        Roll.of(
-                                Die.valueOf(3),
-                                Die.valueOf(3),
-                                Die.valueOf(4),
-                                Die.valueOf(5),
-                                Die.valueOf(1)
-                        ),
-                        16
-                )
-        );
-    }
-
-    @ParameterizedTest
     @MethodSource("yatzy_source")
     void yatzy_scores_50_if_all_dice_have_the_same_number(Roll roll, int score) {
         ScoringRule yatzyScoringRule = new YatzyScoringRule();
