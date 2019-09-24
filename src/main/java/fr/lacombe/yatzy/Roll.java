@@ -89,6 +89,13 @@ public class Roll {
         return Arrays.hashCode(dieOccurrences);
     }
 
+    @Override
+    public String toString() {
+        return "Roll{" +
+                "dieOccurrences=" + Arrays.toString(dieOccurrences) +
+                '}';
+    }
+
     private void incrementDieOccurrence(int die) {
         dieOccurrences[die - OFFSET]++;
     }

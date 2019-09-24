@@ -8,7 +8,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class YatzyTest {
 
@@ -44,102 +43,222 @@ class YatzyTest {
 
     @Test
     void yatzy_scores_0_if_at_least_two_dice_have_different_numbers() {
-        assertEquals(0, new Yatzy(6, 6, 6, 6, 3).yatzy());
+        Yatzy yatzy = new Yatzy(6, 6, 6, 6, 3);
+
+        assertThat(yatzy.yatzy()).isEqualTo(0);
     }
 
-    @Test
-    void ones_scores_sum_of_dice_at_value_one() {
-        assertEquals(0, new Yatzy(6, 2, 2, 4, 5).ones());
-        assertEquals(1, new Yatzy(1, 2, 3, 4, 5).ones());
-        assertEquals(2, new Yatzy(1, 2, 1, 4, 5).ones());
-        assertEquals(4, new Yatzy(1, 2, 1, 1, 1).ones());
+    @ParameterizedTest
+    @MethodSource("ones_source")
+    void ones_scores_sum_of_dice_at_value_one(Roll roll, int score) {
+        Yatzy yatzy = new Yatzy(roll);
+
+        assertThat(yatzy.ones()).isEqualTo(score);
     }
 
-    @Test
-    void twos_scores_sum_of_dice_at_value_two() {
-        assertEquals(0, new Yatzy(1, 5, 3, 1, 6).twos());
-        assertEquals(4, new Yatzy(1, 2, 3, 2, 6).twos());
-        assertEquals(10, new Yatzy(2, 2, 2, 2, 2).twos());
+    private static Stream<Arguments> ones_source() {
+        return Stream.of(
+                Arguments.of(new Roll(new int[]{6, 2, 2, 4, 5}), 0),
+                Arguments.of(new Roll(new int[]{1, 2, 3, 4, 5}), 1),
+                Arguments.of(new Roll(new int[]{1, 2, 1, 4, 5}), 2),
+                Arguments.of(new Roll(new int[]{1, 2, 1, 1, 1}), 4)
+        );
     }
 
-    @Test
-    void threes_scores_sum_of_dice_at_value_three() {
-        assertEquals(0, new Yatzy(1, 2, 4, 2, 4).threes());
-        assertEquals(6, new Yatzy(1, 2, 3, 2, 3).threes());
-        assertEquals(12, new Yatzy(2, 3, 3, 3, 3).threes());
+    @ParameterizedTest
+    @MethodSource("twos_source")
+    void twos_scores_sum_of_dice_at_value_two(Roll roll, int score) {
+        Yatzy yatzy = new Yatzy(roll);
+
+        assertThat(yatzy.twos()).isEqualTo(score);
     }
 
-    @Test
-    void fours_scores_sum_of_dice_at_value_four() {
-        assertEquals(0, new Yatzy(5, 5, 5, 5, 5).fours());
-        assertEquals(4, new Yatzy(4, 5, 5, 5, 5).fours());
-        assertEquals(8, new Yatzy(4, 4, 5, 5, 5).fours());
-        assertEquals(12, new Yatzy(4, 4, 4, 5, 5).fours());
+    private static Stream<Arguments> twos_source() {
+        return Stream.of(
+                Arguments.of(new Roll(new int[]{1, 5, 3, 1, 6}), 0),
+                Arguments.of(new Roll(new int[]{1, 2, 3, 2, 6}), 4),
+                Arguments.of(new Roll(new int[]{2, 2, 2, 2, 2}), 10)
+        );
     }
 
-    @Test
-    void fives_scores_sum_of_dice_at_value_five() {
-        assertEquals(0, new Yatzy(4, 4, 4, 4, 4).fives());
-        assertEquals(10, new Yatzy(4, 4, 4, 5, 5).fives());
-        assertEquals(15, new Yatzy(4, 4, 5, 5, 5).fives());
-        assertEquals(20, new Yatzy(4, 5, 5, 5, 5).fives());
+    @ParameterizedTest
+    @MethodSource("threes_source")
+    void threes_scores_sum_of_dice_at_value_three(Roll roll, int score) {
+        Yatzy yatzy = new Yatzy(roll);
+
+        assertThat(yatzy.threes()).isEqualTo(score);
     }
 
-    @Test
-    void sixes_scores_sum_of_dice_at_value_six() {
-        assertEquals(0, new Yatzy(4, 4, 4, 5, 5).sixes());
-        assertEquals(6, new Yatzy(4, 4, 6, 5, 5).sixes());
-        assertEquals(18, new Yatzy(6, 5, 6, 6, 5).sixes());
+    private static Stream<Arguments> threes_source() {
+        return Stream.of(
+                Arguments.of(new Roll(new int[]{1, 2, 4, 2, 4}), 0),
+                Arguments.of(new Roll(new int[]{1, 2, 3, 2, 3}), 6),
+                Arguments.of(new Roll(new int[]{2, 3, 3, 3, 3}), 12)
+        );
     }
 
-    @Test
-    void one_pair_scores_the_sum_of_the_highest_matching_pair() {
-        assertEquals(0, new Yatzy(1, 2, 3, 5, 6).onePair());
-        assertEquals(6, new Yatzy(3, 4, 3, 5, 6).onePair());
-        assertEquals(10, new Yatzy(5, 3, 3, 3, 5).onePair());
-        assertEquals(12, new Yatzy(5, 3, 6, 6, 5).onePair());
+    @ParameterizedTest
+    @MethodSource("fours_source")
+    void fours_scores_sum_of_dice_at_value_four(Roll roll, int score) {
+        Yatzy yatzy = new Yatzy(roll);
+
+        assertThat(yatzy.fours()).isEqualTo(score);
     }
 
-    @Test
-    void two_pair_scores_the_sum_of_each_pairs() {
-        assertEquals(0, new Yatzy(1, 2, 3, 5, 6).twoPair());
-        assertEquals(16, new Yatzy(3, 3, 5, 4, 5).twoPair());
-        assertEquals(16, new Yatzy(3, 3, 5, 5, 5).twoPair());
+    private static Stream<Arguments> fours_source() {
+        return Stream.of(
+                Arguments.of(new Roll(new int[]{5, 5, 5, 5, 5}), 0),
+                Arguments.of(new Roll(new int[]{4, 5, 5, 5, 5}), 4),
+                Arguments.of(new Roll(new int[]{4, 4, 5, 5, 5}), 8),
+                Arguments.of(new Roll(new int[]{4, 4, 4, 5, 5}), 12)
+        );
     }
 
-    @Test
-    void three_of_a_kind_scores_the_sum_of_three_identical_dices() {
-        assertEquals(0, new Yatzy(1, 2, 3, 5, 6).threeOfAKind());
-        assertEquals(9, new Yatzy(3, 3, 3, 4, 5).threeOfAKind());
-        assertEquals(9, new Yatzy(3, 3, 3, 3, 5).threeOfAKind());
-        assertEquals(9, new Yatzy(3, 3, 3, 3, 3).threeOfAKind());
-        assertEquals(15, new Yatzy(5, 3, 5, 4, 5).threeOfAKind());
+    @ParameterizedTest
+    @MethodSource("fives_source")
+    void fives_scores_sum_of_dice_at_value_five(Roll roll, int score) {
+        Yatzy yatzy = new Yatzy(roll);
+
+        assertThat(yatzy.fives()).isEqualTo(score);
     }
 
-    @Test
-    void four_of_a_kind_scores_the_sum_four_identical_dices() {
-        assertEquals(0, new Yatzy(1, 2, 3, 5, 6).fourOfAKind());
-        assertEquals(12, new Yatzy(3, 3, 3, 3, 5).fourOfAKind());
-        assertEquals(20, new Yatzy(5, 5, 5, 4, 5).fourOfAKind());
+    private static Stream<Arguments> fives_source() {
+        return Stream.of(
+                Arguments.of(new Roll(new int[]{4, 4, 4, 4, 4}), 0),
+                Arguments.of(new Roll(new int[]{4, 4, 4, 5, 5}), 10),
+                Arguments.of(new Roll(new int[]{4, 4, 5, 5, 5}), 15),
+                Arguments.of(new Roll(new int[]{4, 5, 5, 5, 5}), 20)
+        );
     }
 
-    @Test
-    void small_straight_scores_15_when_dice_contains_1_2_3_4_and_5() {
-        assertEquals(0, new Yatzy(1, 2, 2, 4, 5).smallStraight());
-        assertEquals(15, new Yatzy(1, 2, 3, 4, 5).smallStraight());
-        assertEquals(15, new Yatzy(2, 3, 4, 5, 1).smallStraight());
+    @ParameterizedTest
+    @MethodSource("sixes_source")
+    void sixes_scores_sum_of_dice_at_value_six(Roll roll, int score) {
+        Yatzy yatzy = new Yatzy(roll);
+
+        assertThat(yatzy.sixes()).isEqualTo(score);
     }
 
-    @Test
-    void large_straight_scores_20_when_dice_contains_2_3_4_5_and_6() {
-        assertEquals(0, new Yatzy(1, 2, 2, 4, 5).largeStraight());
-        assertEquals(20, new Yatzy(6, 2, 3, 4, 5).largeStraight());
-        assertEquals(20, new Yatzy(2, 3, 4, 5, 6).largeStraight());
+    private static Stream<Arguments> sixes_source() {
+        return Stream.of(
+                Arguments.of(new Roll(new int[]{4, 4, 4, 5, 5}), 0),
+                Arguments.of(new Roll(new int[]{4, 4, 6, 5, 5}), 6),
+                Arguments.of(new Roll(new int[]{6, 5, 6, 6, 5}), 18)
+        );
     }
 
-    @Test
-    void full_house_scores_sum_of_dice_with_a_pair_and_a_three_of_a_kind() {
-        assertEquals(0, new Yatzy(2, 3, 4, 5, 6).fullHouse());
-        assertEquals(18, new Yatzy(6, 2, 2, 2, 6).fullHouse());
+    @ParameterizedTest
+    @MethodSource("one_pair_source")
+    void one_pair_scores_the_sum_of_the_highest_matching_pair(Roll roll, int score) {
+        Yatzy yatzy = new Yatzy(roll);
+
+        assertThat(yatzy.onePair()).isEqualTo(score);
+    }
+
+    private static Stream<Arguments> one_pair_source() {
+        return Stream.of(
+                Arguments.of(new Roll(new int[]{1, 2, 3, 5, 6}), 0),
+                Arguments.of(new Roll(new int[]{3, 4, 3, 5, 6}), 6),
+                Arguments.of(new Roll(new int[]{5, 3, 3, 3, 5}), 10),
+                Arguments.of(new Roll(new int[]{5, 3, 6, 6, 5}), 12)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("two_pair_source")
+    void two_pair_scores_the_sum_of_each_pairs(Roll roll, int score) {
+        Yatzy yatzy = new Yatzy(roll);
+
+        assertThat(yatzy.twoPair()).isEqualTo(score);
+    }
+
+    private static Stream<Arguments> two_pair_source() {
+        return Stream.of(
+                Arguments.of(new Roll(new int[]{1, 2, 3, 5, 6}), 0),
+                Arguments.of(new Roll(new int[]{3, 3, 5, 4, 5}), 16),
+                Arguments.of(new Roll(new int[]{3, 3, 5, 5, 5}), 16)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("three_of_a_kind_source")
+    void three_of_a_kind_scores_the_sum_of_three_identical_dices(Roll roll, int score) {
+        Yatzy yatzy = new Yatzy(roll);
+
+        assertThat(yatzy.threeOfAKind()).isEqualTo(score);
+    }
+
+    private static Stream<Arguments> three_of_a_kind_source() {
+        return Stream.of(
+                Arguments.of(new Roll(new int[]{1, 2, 3, 5, 6}), 0),
+                Arguments.of(new Roll(new int[]{3, 3, 3, 4, 5}), 9),
+                Arguments.of(new Roll(new int[]{3, 3, 3, 3, 5}), 9),
+                Arguments.of(new Roll(new int[]{3, 3, 3, 3, 3}), 9),
+                Arguments.of(new Roll(new int[]{5, 3, 5, 4, 5}), 15)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("four_of_a_kind_source")
+    void four_of_a_kind_scores_the_sum_four_identical_dices(Roll roll, int score) {
+        Yatzy yatzy = new Yatzy(roll);
+
+        assertThat(yatzy.fourOfAKind()).isEqualTo(score);
+    }
+
+    private static Stream<Arguments> four_of_a_kind_source() {
+        return Stream.of(
+                Arguments.of(new Roll(new int[]{1, 2, 3, 5, 6}), 0),
+                Arguments.of(new Roll(new int[]{3, 3, 3, 3, 5}), 12),
+                Arguments.of(new Roll(new int[]{5, 5, 5, 4, 5}), 20)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("small_straight_source")
+    void small_straight_scores_15_when_dice_contains_1_2_3_4_and_5(Roll roll, int score) {
+        Yatzy yatzy = new Yatzy(roll);
+
+        assertThat(yatzy.smallStraight()).isEqualTo(score);
+    }
+
+    private static Stream<Arguments> small_straight_source() {
+        return Stream.of(
+                Arguments.of(new Roll(new int[]{1, 2, 2, 4, 5}), 0),
+                Arguments.of(new Roll(new int[]{1, 2, 3, 4, 5}), 15),
+                Arguments.of(new Roll(new int[]{2, 3, 4, 5, 1}), 15)
+        );
+    }
+
+
+    @ParameterizedTest
+    @MethodSource("large_straight_source")
+    void large_straight_scores_20_when_dice_contains_2_3_4_5_and_6(Roll roll, int score) {
+        Yatzy yatzy = new Yatzy(roll);
+
+        assertThat(yatzy.largeStraight()).isEqualTo(score);
+    }
+
+    private static Stream<Arguments> large_straight_source() {
+        return Stream.of(
+                Arguments.of(new Roll(new int[]{1, 2, 2, 4, 5}), 0),
+                Arguments.of(new Roll(new int[]{6, 2, 3, 4, 5}), 20),
+                Arguments.of(new Roll(new int[]{2, 3, 4, 5, 6}), 20)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("full_house_source")
+    void full_house_scores_sum_of_dice_with_a_pair_and_a_three_of_a_kind(Roll roll, int score) {
+        Yatzy yatzy = new Yatzy(roll);
+
+        assertThat(yatzy.fullHouse()).isEqualTo(score);
+    }
+
+    private static Stream<Arguments> full_house_source() {
+        return Stream.of(
+                Arguments.of(new Roll(new int[]{2, 3, 4, 5, 6}), 0),
+                Arguments.of(new Roll(new int[]{6, 2, 2, 2, 6}), 18)
+        );
     }
 }
