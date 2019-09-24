@@ -10,23 +10,6 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class YatzyTest {
-
-    @ParameterizedTest
-    @MethodSource("two_pair_source")
-    void two_pair_scores_the_sum_of_each_pairs(Roll roll, int score) {
-        Yatzy yatzy = new Yatzy(new TwoPairScoringRule(), roll);
-
-        assertThat(yatzy.score()).isEqualTo(score);
-    }
-
-    private static Stream<Arguments> two_pair_source() {
-        return Stream.of(
-                Arguments.of(new Roll(new int[]{1, 2, 3, 5, 6}), 0),
-                Arguments.of(new Roll(new int[]{3, 3, 5, 4, 5}), 16),
-                Arguments.of(new Roll(new int[]{3, 3, 5, 5, 5}), 16)
-        );
-    }
-
     @ParameterizedTest
     @MethodSource("three_of_a_kind_source")
     void three_of_a_kind_scores_the_sum_of_three_identical_dices(Roll roll, int score) {
