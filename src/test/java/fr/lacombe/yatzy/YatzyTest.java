@@ -1,7 +1,6 @@
 package fr.lacombe.yatzy;
 
 import fr.lacombe.yatzy.scoring.rule.*;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -11,15 +10,6 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class YatzyTest {
-
-    @Test
-    void yatzy_scores_0_if_at_least_two_dice_have_different_numbers() {
-        Roll rollHavingDiceWithDifferentValues = new Roll(new int[]{6, 6, 6, 6, 3});
-
-        Yatzy yatzy = new Yatzy(new YatzyScoringRule(), rollHavingDiceWithDifferentValues);
-
-        assertThat(yatzy.score()).isEqualTo(0);
-    }
 
     @ParameterizedTest
     @MethodSource("ones_source")
