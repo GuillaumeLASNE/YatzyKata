@@ -121,9 +121,9 @@ class YatzyTest {
     @ParameterizedTest
     @MethodSource("fives_source")
     void fives_scores_sum_of_dice_at_value_five(Roll roll, int score) {
-        Yatzy yatzy = new Yatzy(roll);
+        Yatzy yatzy = new Yatzy(new FivesScoringRule(), roll);
 
-        assertThat(yatzy.fives()).isEqualTo(score);
+        assertThat(yatzy.score()).isEqualTo(score);
     }
 
     private static Stream<Arguments> fives_source() {
