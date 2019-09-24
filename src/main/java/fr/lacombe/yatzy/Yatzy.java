@@ -1,6 +1,5 @@
 package fr.lacombe.yatzy;
 
-import java.util.List;
 import java.util.Optional;
 
 public class Yatzy {
@@ -46,16 +45,6 @@ public class Yatzy {
     public int fourOfAKind() {
         Optional<Integer> fourOfAKind = roll.getFourOfAKind();
         return fourOfAKind.map(fourOfAKindValue -> fourOfAKindValue * 4).orElse(0);
-    }
-
-    public int twoPair() {
-        List<Integer> pairs = roll.getPairs();
-        if (pairs.size() < 2) {
-            return 0;
-        }
-
-        return pairs.stream()
-                .reduce(0, (accumulator, dieValue) -> accumulator + dieValue * 2);
     }
 
     public int fullHouse() {

@@ -171,9 +171,9 @@ class YatzyTest {
     @ParameterizedTest
     @MethodSource("two_pair_source")
     void two_pair_scores_the_sum_of_each_pairs(Roll roll, int score) {
-        Yatzy yatzy = new Yatzy(roll);
+        Yatzy yatzy = new Yatzy(new TwoPairScoringRule(), roll);
 
-        assertThat(yatzy.twoPair()).isEqualTo(score);
+        assertThat(yatzy.score()).isEqualTo(score);
     }
 
     private static Stream<Arguments> two_pair_source() {
