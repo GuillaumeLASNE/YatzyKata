@@ -1,7 +1,5 @@
 package fr.lacombe.yatzy;
 
-import java.util.Optional;
-
 public class Yatzy {
 
     private final ScoringRule scoringRule;
@@ -35,11 +33,6 @@ public class Yatzy {
         } else {
             return 0;
         }
-    }
-
-    public int fourOfAKind() {
-        Optional<Integer> fourOfAKind = roll.getFourOfAKind();
-        return fourOfAKind.map(fourOfAKindValue -> fourOfAKindValue * 4).orElse(0);
     }
 
     public int fullHouse() {

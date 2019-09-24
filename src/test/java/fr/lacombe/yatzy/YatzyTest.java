@@ -205,9 +205,9 @@ class YatzyTest {
     @ParameterizedTest
     @MethodSource("four_of_a_kind_source")
     void four_of_a_kind_scores_the_sum_four_identical_dices(Roll roll, int score) {
-        Yatzy yatzy = new Yatzy(roll);
+        Yatzy yatzy = new Yatzy(new FourOfAKindScoringRule(), roll);
 
-        assertThat(yatzy.fourOfAKind()).isEqualTo(score);
+        assertThat(yatzy.score()).isEqualTo(score);
     }
 
     private static Stream<Arguments> four_of_a_kind_source() {
