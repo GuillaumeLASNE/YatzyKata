@@ -11,22 +11,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class YatzyTest {
     @ParameterizedTest
-    @MethodSource("sixes_source")
-    void sixes_scores_sum_of_dice_at_value_six(Roll roll, int score) {
-        Yatzy yatzy = new Yatzy(new SixesScoringRule(), roll);
-
-        assertThat(yatzy.score()).isEqualTo(score);
-    }
-
-    private static Stream<Arguments> sixes_source() {
-        return Stream.of(
-                Arguments.of(new Roll(new int[]{4, 4, 4, 5, 5}), 0),
-                Arguments.of(new Roll(new int[]{4, 4, 6, 5, 5}), 6),
-                Arguments.of(new Roll(new int[]{6, 5, 6, 6, 5}), 18)
-        );
-    }
-
-    @ParameterizedTest
     @MethodSource("one_pair_source")
     void one_pair_scores_the_sum_of_the_highest_matching_pair(Roll roll, int score) {
         Yatzy yatzy = new Yatzy(new OnePairScoringRule(), roll);
